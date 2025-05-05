@@ -1,15 +1,10 @@
-# sonarr-mcp
+# Sonarr MCP Server
 
-To install dependencies:
+This is a [Model Context Protocol](https://modelcontextprotocol.org) (MCP) server for accessing Sonarr. It provides a set of tools for interacting with Sonarr programmatically.
 
-```bash
-bun install
-```
+## Available Tools
 
-To run:
+The following tools are available:
 
-```bash
-bun run index.ts
-```
-
-This project was created using `bun init` in bun v1.2.12. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.
+- `searchSeries`: Search for series in Sonarr
+- `addSeries`: Add a series to Sonarr

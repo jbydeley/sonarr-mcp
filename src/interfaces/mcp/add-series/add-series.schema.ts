@@ -2,7 +2,7 @@ import { z } from "zod";
 
 export const AddSeriesSchema = z.object({
   title: z.string().describe("The title of the show to add"),
-  tvdbId: z.number().describe("The TVDB ID of the show to add"),
+  tvdbId: z.number().min(1).describe("The TVDB ID of the show to add"),
   qualityProfileId: z
     .number()
     .default(1)

@@ -3,7 +3,7 @@ export class TvdbIdVo {
 
   constructor(value: number) {
     if (!Number.isInteger(value) || value < 0) {
-      throw new Error("TVDB ID must be a positive integer");
+      throw new Error(`TVDB ID must be a positive integer: ${value}`);
     }
 
     this.value = value;

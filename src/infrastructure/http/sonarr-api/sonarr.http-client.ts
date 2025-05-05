@@ -1,6 +1,6 @@
 import axios from "axios";
-import { env } from "@/infrastructure/env";
-import type { HttpClient } from "@/core/series/ports/http-client.interface";
+import type { HttpClient } from "@/core/common/ports/http-client.interface.js";
+import { env } from "@/infrastructure/env.js";
 
 export class SonarrHttpClient implements HttpClient {
   private readonly baseUrl = env.SONARR_URL;

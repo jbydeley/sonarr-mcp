@@ -2,13 +2,24 @@
   "name": "sonarr-mcp",
   "module": "index.ts",
   "type": "module",
+  "bin": {
+    "sonarr-mcp": "dist/src/main.js"
+  },
   "private": true,
   "scripts": {
-    "start": "tsx ./src/apps/api/index.ts"
+    "build": "tsc && tsc-alias && chmod +x dist/src/main.js",
+    "start": "tsx ./src/apps/api/index.ts",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "devDependencies": {
-    "@types/bun": "latest",
+    "@types/node": "latest",
+    "@vitest/coverage-v8": "3.1.2",
+    "nock": "^14.0.4",
+    "tsc-alias": "^1.8.16",
     "tsx": "^4.19.4",
+    "typescript": "^5.8.3",
+    "vite-tsconfig-paths": "^5.1.4",
     "vitest": "^3.1.2"
   },
   "peerDependencies": {
@@ -17,7 +28,7 @@
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.11.0",
     "axios": "^1.9.0",
-    "fastify": "^5.3.2",
+    "dotenv": "^16.5.0",
     "zod": "^3.24.3"
   }
 }
