@@ -2,13 +2,13 @@
   "name": "sonarr-mcp",
   "module": "index.ts",
   "type": "module",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "bin": {
     "sonarr-mcp": "dist/src/main.js"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/jbydeley/sonarr-mcp.git"
+    "url": "git+https://github.com/jbydeley/sonarr-mcp.git"
   },
   "scripts": {
     "build": "tsc && tsc-alias && chmod +x dist/src/main.js",
