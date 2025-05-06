@@ -5,7 +5,7 @@ on:
       - main
 jobs:
   publish:
-    environment: "Production"
+    environment: Production
     runs-on: ubuntu-latest
     permissions:
       id-token: write
@@ -26,6 +26,8 @@ jobs:
       - run: npm ci
 
       - run: npm run build
+
+      - run: echo "NPM_TOKEN is set; ${{ secrets.NPM_TOKEN != '' }}"
 
       - run: npx semantic-release
         env:
