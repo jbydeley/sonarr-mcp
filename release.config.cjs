@@ -1,4 +1,3 @@
-// release.config.js
 module.exports = {
   branches: ["main"],
   repositoryUrl: "https://github.com/jbydeley/sonarr-mcp",
