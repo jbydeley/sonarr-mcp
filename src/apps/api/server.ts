@@ -17,16 +17,15 @@ export const server = new McpServer({
 
 const sonarrHttpClient = new SonarrHttpClient();
 const sonarrRepository = new SonarrRepository(sonarrHttpClient);
-const seriesService = new SeriesService(sonarrRepository);
 
 // Series Tools
+const seriesService = new SeriesService(sonarrRepository);
 const searchSeriesTool = new SearchSeriesTool(seriesService);
 const addSeriesTool = new AddSeriesTool(seriesService);
+searchSeriesTool.register(server);
+addSeriesTool.register(server);
 
 // Quality Tools
 const qualityService = new QualityService(sonarrRepository);
 const listQualitiesTool = new ListQualitiesTool(qualityService);
-
-searchSeriesTool.register(server);
-addSeriesTool.register(server);
 listQualitiesTool.register(server);
