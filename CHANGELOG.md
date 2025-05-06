@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/jbydeley/sonarr-mcp/compare/v1.0.0...v1.0.1) (2025-05-06)
+
+
+### Bug Fixes
+
+* **ci:** update package version ([#6](https://github.com/jbydeley/sonarr-mcp/issues/6)) ([9ced110](https://github.com/jbydeley/sonarr-mcp/commit/9ced110fae3d3c5d18fb1ebf3ed81997feb96c30))
+
 # 1.0.0 (2025-05-06)
 
 
