@@ -10,11 +10,6 @@
     "type": "git",
     "url": "https://github.com/jbydeley/sonarr-mcp.git"
   },
-  "release": {
-    "branches": [
-      "main"
-    ]
-  },
   "scripts": {
     "build": "tsc && tsc-alias && chmod +x dist/src/main.js",
     "start": "tsx ./src/apps/api/index.ts",
