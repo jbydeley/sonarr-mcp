@@ -5,9 +5,44 @@ import type { AddSeriesSchema } from "@/interfaces/mcp/add-series/add-series.sch
 import type { QualityRepository } from "@/core/quality/ports/quality.repository.js";
 import type { QualityProfile } from "@/core/quality/entities/quality-profile.entity.js";
 import { TvdbIdVo } from "@/core/series/value-objects/tvdb-id.vo.js";
+import type { CalendarRepository } from "@/core/calendar/ports/calendar.repository.js";
+import type { Episode } from "@/core/calendar/entities/episode.entity.js";
+import type { ListUpcomingEpisodesSchema } from "@/interfaces/mcp/list-upcoming-episodes/list-upcoming-episodes.schema.js";
+import type { DateRangeVO } from "@/core/calendar/value-objects/date-range.vo.js";
 
-export class SonarrRepository implements SeriesRepository, QualityRepository {
+export class SonarrRepository
+  implements SeriesRepository, QualityRepository, CalendarRepository
+{
   constructor(private readonly httpClient: HttpClient) {}
+  async listUpcomingEpisodes(
+    input: Omit<ListUpcomingEpisodesSchema, "start" | "end"> & {
+      dateRange: DateRangeVO;
+    }
+  ): Promise<Episode[]> {
+    try {
+      const params = Object.entries(input)
+        .filter(([_, v]) => v !== undefined && v !== null)
+        .reduce(
+          (acc, [k, v]) => ({ ...acc, [k]: String(v) }),
+          {} as Record<string, string>
+        );
+
+      params.start = input.dateRange.start.toISOString();
+      params.end = input.dateRange.end.toISOString();
+
+      const queryString = new URLSearchParams(
+        params as Record<string, string>
+      ).toString();
+      const url = `/api/v3/calendar${queryString ? `?${queryString}` : ""}`;
+
+      const episodes = await this.httpClient.get<Episode[]>(url);
+
+      return episodes;
+    } catch (error) {
+      console.error("Error listing upcoming episodes:", error);
+      throw error;
+    }
+  }
 
   async searchSeries(term: string): Promise<Series[]> {
     try {
