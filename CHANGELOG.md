@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/jbydeley/sonarr-mcp/compare/v1.0.1...v1.1.0) (2025-05-07)
+
+
+### Features
+
+* **cal:** list upcoming episodes from calendar ([#7](https://github.com/jbydeley/sonarr-mcp/issues/7)) ([95ce7c1](https://github.com/jbydeley/sonarr-mcp/commit/95ce7c15f23485deffe3ea98d0cec6a0183613f2))
+
 ## [1.0.1](https://github.com/jbydeley/sonarr-mcp/compare/v1.0.0...v1.0.1) (2025-05-06)
 
 
