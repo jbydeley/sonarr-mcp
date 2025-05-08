@@ -6,7 +6,7 @@ export const listQualityProfilesHandler = async (): Promise<CallToolResult> => {
   const sonarrHttpClient = new SonarrHttpClient();
 
   const qualityProfiles = await sonarrHttpClient.get<QualityProfile[]>(
-    `/api/v3/qualityProfiles`
+    `/api/v3/qualityProfile`
   );
 
   return {
