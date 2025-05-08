@@ -9,6 +9,9 @@ The following tools are available:
 - `searchSeries`: Search for series in Sonarr
 - `addSeries`: Add a series to Sonarr
 - `listQualityProfiles`: List quality profiles in Sonarr
+- `listUpcomingEpisodes`: List upcoming episodes in Sonarr
+- `listRecentDownloads`: List recent downloads in Sonarr
+- `getLogs`: Get logs from Sonarr
 
 ## Usage
 

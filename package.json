@@ -12,7 +12,7 @@
   },
   "scripts": {
     "build": "tsc && tsc-alias && chmod +x dist/src/main.js",
-    "start": "tsx ./src/apps/api/index.ts",
+    "start": "tsx ./src/api/index.ts",
     "test": "vitest run",
     "test:watch": "vitest"
   },
