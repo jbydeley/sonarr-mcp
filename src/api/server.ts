@@ -1,27 +1,144 @@
+import {
+  addSeriesToolDescription,
+  addSeriesToolName,
+  addSeriesSchema,
+  addSeriesToolHandler,
+} from "@/tools/add-series/index.js";
+import {
+  searchSeriesToolDescription,
+  searchSeriesToolName,
+  searchSeriesSchema,
+  searchSeriesToolHandler,
+} from "@/tools/search-series/index.js";
+import {
+  findEpisodesToolDescription,
+  findEpisodesToolName,
+  findEpisodesSchema,
+  findEpisodesToolHandler,
+} from "@/tools/find-episodes/index.js";
+import {
+  listUpcomingEpisodesToolDescription,
+  listUpcomingEpisodesToolName,
+  listUpcomingEpisodesSchema,
+  listUpcomingEpisodesToolHandler,
+} from "@/tools/list-upcoming-episodes/index.js";
+import {
+  listRecentDownloadsToolDescription,
+  listRecentDownloadsToolName,
+  listRecentDownloadsSchema,
+  listRecentDownloadsToolHandler,
+} from "@/tools/list-recent-downloads/index.js";
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
-import { registerTool } from "@/common/register-tool.js";
-import { searchSeriesToolRegistration } from "@/features/series/search-series/search-series.const.js";
-import { listQualityProfilesToolRegistration } from "@/features/quality/list-quality-profiles/list-quality-profiles.const.js";
-import { listUpcomingEpisodesToolRegistration } from "@/features/episodes/list-upcoming-episodes/list-upcoming-episodes.const.js";
-import { addSeriesToolRegistration } from "@/features/series/add-series/add-series.const.js";
-import { getEpisodeToolRegistration } from "@/features/episodes/get-episode/get-episode.const.js";
-import { getEpisodesToolRegistration } from "@/features/episodes/get-episodes/get-episodes.const.js";
-import { listRecentDownloadsToolRegistration } from "@/features/history/list-recent-downloads/list-recent-downloads.const.js";
-import { getLogsToolRegistration } from "@/features/log/get-logs/get-logs.const.js";
+import {
+  getLogsToolHandler,
+  getLogsToolName,
+  getLogsToolDescription,
+  getLogsSchema,
+} from "@/tools/get-logs/index.js";
+import {
+  episodeResourceHandler,
+  episodeResourceName,
+  episodeResourceUriTemplate,
+} from "@/resources/episode/index.js";
+import {
+  qualityProfilesResourceHandler,
+  qualityProfilesResourceName,
+  qualityProfilesResourceUri,
+} from "@/resources/quality-profiles/index.js";
+import {
+  seriesResourceHandler,
+  seriesResourceName,
+  seriesResourceUriTemplate,
+} from "@/resources/series/index.js";
+import {
+  qualityDefinitionResourceHandler,
+  qualityDefinitionResourceName,
+  qualityDefinitionResourceUri,
+} from "@/resources/quality-definition/index.js";
 
 export const server = new McpServer({
   name: "Sonarr",
   version: "1.0.0",
   capabilities: {
-    tools: {},
+    tools: {
+      addSeries: addSeriesToolName,
+      findEpisodes: findEpisodesToolName,
+      searchSeries: searchSeriesToolName,
+      listUpcomingEpisodes: listUpcomingEpisodesToolName,
+      listRecentDownloads: listRecentDownloadsToolName,
+      getLogs: getLogsToolName,
+    },
+    resources: {
+      episode: episodeResourceUriTemplate,
+      qualityDefinition: qualityDefinitionResourceUri,
+      qualityProfiles: qualityProfilesResourceUri,
+      series: seriesResourceUriTemplate,
+    },
   },
 });
 
-registerTool(server, searchSeriesToolRegistration);
-registerTool(server, listQualityProfilesToolRegistration);
-registerTool(server, listUpcomingEpisodesToolRegistration);
-registerTool(server, addSeriesToolRegistration);
-registerTool(server, getEpisodeToolRegistration);
-registerTool(server, getEpisodesToolRegistration);
-registerTool(server, listRecentDownloadsToolRegistration);
-registerTool(server, getLogsToolRegistration);
+server.resource(
+  episodeResourceName,
+  episodeResourceUriTemplate,
+  episodeResourceHandler
+);
+
+server.resource(
+  qualityDefinitionResourceName,
+  qualityDefinitionResourceUri,
+  qualityDefinitionResourceHandler
+);
+
+server.resource(
+  qualityProfilesResourceName,
+  qualityProfilesResourceUri,
+  qualityProfilesResourceHandler
+);
+
+server.resource(
+  seriesResourceName,
+  seriesResourceUriTemplate,
+  seriesResourceHandler
+);
+
+server.tool(
+  addSeriesToolName,
+  addSeriesToolDescription,
+  addSeriesSchema.shape,
+  addSeriesToolHandler
+);
+
+server.tool(
+  findEpisodesToolName,
+  findEpisodesToolDescription,
+  findEpisodesSchema.shape,
+  findEpisodesToolHandler
+);
+
+server.tool(
+  searchSeriesToolName,
+  searchSeriesToolDescription,
+  searchSeriesSchema.shape,
+  searchSeriesToolHandler
+);
+
+server.tool(
+  listUpcomingEpisodesToolName,
+  listUpcomingEpisodesToolDescription,
+  listUpcomingEpisodesSchema.shape,
+  listUpcomingEpisodesToolHandler
+);
+
+server.tool(
+  listRecentDownloadsToolName,
+  listRecentDownloadsToolDescription,
+  listRecentDownloadsSchema.shape,
+  listRecentDownloadsToolHandler
+);
+
+server.tool(
+  getLogsToolName,
+  getLogsToolDescription,
+  getLogsSchema.shape,
+  getLogsToolHandler
+);

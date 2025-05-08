@@ -1,0 +1,34 @@
+import { ReadResourceResult } from "@modelcontextprotocol/sdk/types.js";
+import { SonarrHttpClient } from "@/common/sonarr.http-client.js";
+
+{{#if isUriTemplate}}
+import { ResourceTemplate } from "@modelcontextprotocol/sdk/server/mcp.js";
+{{/if}}
+
+export const {{ camelCase name }}ResourceName = "{{ name }}";
+{{#if isUriTemplate}}
+export const {{ camelCase name }}ResourceUriTemplate = new ResourceTemplate("sonarr://{{ uri }}", {
+	list: undefined,
+});
+{{else}}
+export const {{ camelCase name }}ResourceUri = "sonarr://{{ uri }}";
+{{/if}}
+
+export const {{ camelCase name }}ResourceHandler = async (
+  uri: URL,
+	{{#if isUriTemplate}}
+	variables: Record<string, string | string[] | undefined>,
+	{{/if}}
+  _extra: any
+): Promise<ReadResourceResult> => {
+		const sonarrHttpClient = new SonarrHttpClient();
+
+	return {
+    contents: [
+      {
+        uri: uri.pathname,
+        blob: JSON.stringify(uri),
+      },
+    ],
+  };
+};
