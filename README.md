@@ -6,12 +6,21 @@ This is a [Model Context Protocol](https://modelcontextprotocol.org) (MCP) serve
 
 The following tools are available:
 
-- `searchSeries`: Search for series in Sonarr
-- `addSeries`: Add a series to Sonarr
-- `listQualityProfiles`: List quality profiles in Sonarr
-- `listUpcomingEpisodes`: List upcoming episodes in Sonarr
-- `listRecentDownloads`: List recent downloads in Sonarr
-- `getLogs`: Get logs from Sonarr
+- `add-series`: Add a series to Sonarr
+- `find-episodes`: Find episodes in Sonarr
+- `get-logs`: Get paginated logs from Sonarr
+- `list-recent-downloads`: List recent downloads from Sonarr
+- `list-upcoming-episodes`: List upcoming episodes from Sonarr
+- `search-series`: Search for a TV series by term
+
+## Available Resources
+
+The following resources are available:
+
+- `episode`: Retrieve information about a specific episode by ID
+- `quality-definition`: List quality definitions used by Sonarr
+- `quality-profiles`: List quality profiles configured in Sonarr
+- `series`: Retrieve information about a specific series by ID
 
 ## Usage
 
