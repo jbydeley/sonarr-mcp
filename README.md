@@ -1,6 +1,6 @@
 # Sonarr MCP Server
 
-This is a [Model Context Protocol](https://modelcontextprotocol.org) (MCP) server for accessing Sonarr. It provides a set of tools for interacting with Sonarr programmatically.
+This is a [Model Context Protocol](https://modelcontextprotocol.org) (MCP) server for accessing Sonarr. It provides a set of tools for interacting with Sonarr programmatically and it's awesome!
 
 ## Available Tools
 
