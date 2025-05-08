@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/jbydeley/sonarr-mcp/compare/v1.1.0...v1.2.0) (2025-05-08)
+
+
+### Features
+
+* **arch:** refactored architecture to be feature based ([#8](https://github.com/jbydeley/sonarr-mcp/issues/8)) ([5939da5](https://github.com/jbydeley/sonarr-mcp/commit/5939da51de935a7660b381b4d9acd8f458129900))
+
 # [1.1.0](https://github.com/jbydeley/sonarr-mcp/compare/v1.0.1...v1.1.0) (2025-05-07)
 
 
