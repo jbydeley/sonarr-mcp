@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/jbydeley/sonarr-mcp/compare/v1.2.1...v1.3.0) (2025-05-08)
+
+
+### Features
+
+* **res:** use resources when possible ([#12](https://github.com/jbydeley/sonarr-mcp/issues/12)) ([8f58f7d](https://github.com/jbydeley/sonarr-mcp/commit/8f58f7dfd523e650f7a177768e1b65f1692062df))
+
 ## [1.2.1](https://github.com/jbydeley/sonarr-mcp/compare/v1.2.0...v1.2.1) (2025-05-08)
 
 
