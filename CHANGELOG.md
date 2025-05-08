@@ -1,3 +1,10 @@
+## [1.2.1](https://github.com/jbydeley/sonarr-mcp/compare/v1.2.0...v1.2.1) (2025-05-08)
+
+
+### Bug Fixes
+
+* **qp:** quality profiles uri ([#9](https://github.com/jbydeley/sonarr-mcp/issues/9)) ([68d9afd](https://github.com/jbydeley/sonarr-mcp/commit/68d9afd5f7f69ba126eefa08f0609dcfe2a07929))
+
 # [1.2.0](https://github.com/jbydeley/sonarr-mcp/compare/v1.1.0...v1.2.0) (2025-05-08)
 
 
