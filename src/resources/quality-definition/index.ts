@@ -2,10 +2,12 @@ import { ReadResourceResult } from "@modelcontextprotocol/sdk/types.js";
 import { SonarrHttpClient } from "@/common/sonarr.http-client.js";
 import { QualityDefinition } from "@/common/entities/quality-definition.entity.js";
 
-export const qualityDefinitionResourceName = "quality-definition";
-export const qualityDefinitionResourceUri = "sonarr://quality-definition";
+export const enabled = true;
 
-export const qualityDefinitionResourceHandler = async (
+export const resourceName = "quality-definition";
+export const resourceUri = "sonarr://quality-definition";
+
+export const resourceHandler = async (
   uri: URL,
   _extra: any
 ): Promise<ReadResourceResult> => {
