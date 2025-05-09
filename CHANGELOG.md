@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/jbydeley/sonarr-mcp/compare/v1.3.0...v1.4.0) (2025-05-09)
+
+
+### Features
+
+* **arch:** dynamic tool and resource loading ([#13](https://github.com/jbydeley/sonarr-mcp/issues/13)) ([0d6dd3e](https://github.com/jbydeley/sonarr-mcp/commit/0d6dd3ec716cd49d291f8c88117f63d1f3f3edf2))
+
 # [1.3.0](https://github.com/jbydeley/sonarr-mcp/compare/v1.2.1...v1.3.0) (2025-05-08)
 
 
