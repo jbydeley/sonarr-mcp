@@ -4,7 +4,9 @@ import { SonarrHttpClient } from "@/common/sonarr.http-client.js";
 import { LogsResponse } from "@/common/entities/log.entity.js";
 import { toUrlParams } from "@/common/to-url-params.js";
 
-export const getLogsSchema = z.object({
+export const enabled = true;
+
+export const toolSchema = z.object({
   page: z.number().default(1),
   pageSize: z.number().default(10),
   sortKey: z.string().default("date"),
@@ -14,12 +16,12 @@ export const getLogsSchema = z.object({
   level: z.enum(["debug", "info", "warning", "error"]).default("info"),
 });
 
-export type GetLogsDto = z.infer<typeof getLogsSchema>;
+export type GetLogsDto = z.infer<typeof toolSchema>;
 
-export const getLogsToolName = "get-logs";
-export const getLogsToolDescription = "Get paginated logs from Sonarr";
+export const toolName = "get-logs";
+export const toolDescription = "Get paginated logs from Sonarr";
 
-export const getLogsToolHandler = async (
+export const toolHandler = async (
   data: GetLogsDto
 ): Promise<CallToolResult> => {
   const sonarrHttpClient = new SonarrHttpClient();

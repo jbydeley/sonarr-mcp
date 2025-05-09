@@ -4,7 +4,9 @@ import { SonarrHttpClient } from "@/common/sonarr.http-client.js";
 import { toUrlParams } from "@/common/to-url-params.js";
 import { Episode } from "@/common/entities/episode.entity.js";
 
-export const listUpcomingEpisodesSchema = z.object({
+export const enabled = true;
+
+export const toolSchema = z.object({
   start: z.coerce
     .date()
     .default(new Date())
@@ -13,34 +15,31 @@ export const listUpcomingEpisodesSchema = z.object({
     .date()
     .default(new Date(Date.now() + 7 * 24 * 60 * 60 * 1000))
     .describe("The end date (ISO8601 string or JS Date)"),
-  unmonitored: z.preprocess(
-    (val) => (val === undefined ? false : val),
-    z.boolean().describe("Whether to include unmonitored episodes")
-  ),
-  includeSeries: z.preprocess(
-    (val) => (val === undefined ? false : val),
-    z.boolean().describe("Whether to include series information")
-  ),
-  includeEpisodeFile: z.preprocess(
-    (val) => (val === undefined ? false : val),
-    z.boolean().describe("Whether to include episode file information")
-  ),
-  includeEpisodeImages: z.preprocess(
-    (val) => (val === undefined ? false : val),
-    z.boolean().describe("Whether to include episode images")
-  ),
+  unmonitored: z
+    .boolean()
+    .default(false)
+    .describe("Whether to include unmonitored episodes"),
+  includeSeries: z
+    .boolean()
+    .default(false)
+    .describe("Whether to include series information"),
+  includeEpisodeFile: z
+    .boolean()
+    .default(false)
+    .describe("Whether to include episode file information"),
+  includeEpisodeImages: z
+    .boolean()
+    .default(false)
+    .describe("Whether to include episode images"),
   tags: z.array(z.string()).nullish().describe("Optional tag IDs"),
 });
 
-export type ListUpcomingEpisodesDto = z.infer<
-  typeof listUpcomingEpisodesSchema
->;
+export type ListUpcomingEpisodesDto = z.infer<typeof toolSchema>;
 
-export const listUpcomingEpisodesToolName = "list-upcoming-episodes";
-export const listUpcomingEpisodesToolDescription =
-  "List upcoming episodes from sonarr";
+export const toolName = "list-upcoming-episodes";
+export const toolDescription = "List upcoming episodes from sonarr";
 
-export const listUpcomingEpisodesToolHandler = async (
+export const toolHandler = async (
   data: ListUpcomingEpisodesDto
 ): Promise<CallToolResult> => {
   const sonarrHttpClient = new SonarrHttpClient();

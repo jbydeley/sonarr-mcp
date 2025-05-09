@@ -3,16 +3,18 @@ import { CallToolResult } from "@modelcontextprotocol/sdk/types.js";
 import { SonarrHttpClient } from "@/common/sonarr.http-client.js";
 import { Series } from "@/common/entities/series.entity.js";
 
-export const searchSeriesSchema = z.object({
+export const enabled = true;
+
+export const toolSchema = z.object({
   term: z.string().describe("The term to search for"),
 });
 
-export type SearchSeriesDto = z.infer<typeof searchSeriesSchema>;
+export type SearchSeriesDto = z.infer<typeof toolSchema>;
 
-export const searchSeriesToolName = "search-series";
-export const searchSeriesToolDescription = "Search for a TV series by term";
+export const toolName = "search-series";
+export const toolDescription = "Search for a TV series by term";
 
-export const searchSeriesToolHandler = async (
+export const toolHandler = async (
   data: SearchSeriesDto
 ): Promise<CallToolResult> => {
   const sonarrHttpClient = new SonarrHttpClient();

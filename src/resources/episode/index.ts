@@ -3,15 +3,14 @@ import { SonarrHttpClient } from "@/common/sonarr.http-client.js";
 import { ResourceTemplate } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { Episode } from "@/common/entities/episode.entity.js";
 
-export const episodeResourceName = "episode";
-export const episodeResourceUriTemplate = new ResourceTemplate(
-  "sonarr://episode/{id}",
-  {
-    list: undefined,
-  }
-);
+export const enabled = true;
 
-export const episodeResourceHandler = async (
+export const resourceName = "episode";
+export const resourceUri = new ResourceTemplate("sonarr://episode/{id}", {
+  list: undefined,
+});
+
+export const resourceHandler = async (
   uri: URL,
   { id }: Record<string, string | string[] | undefined>,
   _extra: any
