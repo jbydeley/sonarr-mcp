@@ -1,19 +1,19 @@
-import { ReadResourceResult } from "@modelcontextprotocol/sdk/types.js";
-import { SonarrHttpClient } from "@/common/sonarr.http-client.js";
-import { Series } from "@/common/entities/series.entity.js";
-import { ResourceTemplate } from "@modelcontextprotocol/sdk/server/mcp.js";
+import type { Series } from '@/common/entities/series.entity.js';
+import { SonarrHttpClient } from '@/common/sonarr.http-client.js';
+import { ResourceTemplate } from '@modelcontextprotocol/sdk/server/mcp.js';
+import type { ReadResourceResult } from '@modelcontextprotocol/sdk/types.js';
 
 export const enabled = true;
 
-export const resourceName = "series";
-export const resourceUri = new ResourceTemplate("sonarr://series/{id}", {
+export const resourceName = 'series';
+export const resourceUri = new ResourceTemplate('sonarr://series/{id}', {
   list: undefined,
 });
 
 export const resourceHandler = async (
   uri: URL,
   { id }: Record<string, string | string[] | undefined>,
-  _extra: any
+  _extra: Record<string, unknown>,
 ): Promise<ReadResourceResult> => {
   const sonarrHttpClient = new SonarrHttpClient();
 
@@ -23,7 +23,7 @@ export const resourceHandler = async (
     contents: [
       {
         uri: uri.pathname,
-        mimeType: "application/json",
+        mimeType: 'application/json',
         text: JSON.stringify(series),
       },
     ],

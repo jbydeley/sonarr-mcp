@@ -1,6 +1,7 @@
-import { z } from "zod";
-import { LanguageSchema } from "./language.entity.js";
-import { QualitySchema } from "./quality.entity.js";
+import { z } from 'zod';
+import { LanguageSchema } from './language.entity.js';
+import { QualitySchema } from './quality.entity.js';
+import { CustomFormatSchema } from './custom-format.entity.js';
 
 export const EpisodeFileSchema = z.object({
   id: z.number(),
@@ -14,7 +15,7 @@ export const EpisodeFileSchema = z.object({
   releaseGroup: z.string(),
   languages: z.array(LanguageSchema),
   quality: QualitySchema,
-  customFormats: z.array(z.any()),
+  customFormats: z.array(CustomFormatSchema),
   customFormatScore: z.number(),
   indexerFlags: z.number(),
   releaseType: z.string(),

@@ -1,30 +1,30 @@
 module.exports = {
-  branches: ["main"],
-  repositoryUrl: "https://github.com/jbydeley/sonarr-mcp",
-  tagFormat: "v${version}",
+  branches: ['main'],
+  repositoryUrl: 'https://github.com/jbydeley/sonarr-mcp',
+  tagFormat: 'v${version}',
   plugins: [
-    "@semantic-release/commit-analyzer",
-    "@semantic-release/release-notes-generator",
+    '@semantic-release/commit-analyzer',
+    '@semantic-release/release-notes-generator',
     [
-      "@semantic-release/changelog",
+      '@semantic-release/changelog',
       {
-        changelogFile: "CHANGELOG.md",
+        changelogFile: 'CHANGELOG.md',
       },
     ],
     [
-      "@semantic-release/npm",
+      '@semantic-release/npm',
       {
         npmPublish: true,
       },
     ],
     [
-      "@semantic-release/git",
+      '@semantic-release/git',
       {
-        assets: ["CHANGELOG.md", "package.json", "package-lock.json"],
+        assets: ['CHANGELOG.md', 'package.json', 'package-lock.json'],
         message:
-          "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}",
+          'chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}',
       },
     ],
-    "@semantic-release/github",
+    '@semantic-release/github',
   ],
 };

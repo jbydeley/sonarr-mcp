@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const StatisticsSchema = z.object({
   seasonCount: z.number(),
@@ -8,4 +8,5 @@ export const StatisticsSchema = z.object({
   sizeOnDisk: z.number(),
   percentOfEpisodes: z.number(),
 });
+
 export type Statistics = z.infer<typeof StatisticsSchema>;

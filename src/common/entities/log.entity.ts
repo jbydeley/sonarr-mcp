@@ -1,5 +1,5 @@
-import { z } from "zod";
-import { LogRecordSchema } from "./log-record.entity.js";
+import { z } from 'zod';
+import { LogRecordSchema } from './log-record.entity.js';
 
 export const LogsResponseSchema = z.object({
   page: z.number(),

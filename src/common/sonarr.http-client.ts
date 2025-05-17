@@ -1,12 +1,12 @@
-import axios from "axios";
-import { env } from "./env.js";
+import axios from 'axios';
+import { env } from './env.js';
 
 export class SonarrHttpClient {
   private readonly baseUrl = env.SONARR_URL;
   private readonly apiKey = env.SONARR_API_KEY;
 
   private get headers() {
-    return { "X-Api-Key": this.apiKey };
+    return { 'X-Api-Key': this.apiKey };
   }
 
   async get<T = unknown>(path: string): Promise<T> {

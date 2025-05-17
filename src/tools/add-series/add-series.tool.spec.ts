@@ -1,15 +1,15 @@
-import { describe, it, expect, vi, beforeEach } from "vitest";
-import { toolHandler, toolSchema } from "./index.js";
+import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { toolHandler, toolSchema } from './index.js';
 
-vi.mock("@/common/sonarr.http-client.js", () => {
+vi.mock('@/common/sonarr.http-client.js', () => {
   return {
     SonarrHttpClient: vi.fn().mockImplementation(() => ({
       post: vi.fn().mockResolvedValue({
         id: 123,
-        title: "Test Series",
+        title: 'Test Series',
         tvdbId: 999,
         qualityProfileId: 1,
-        rootFolderPath: "/tv",
+        rootFolderPath: '/tv',
         monitored: true,
         seasonFolder: true,
         languageProfileId: 2,
@@ -19,46 +19,46 @@ vi.mock("@/common/sonarr.http-client.js", () => {
   };
 });
 
-describe("add-series schema", () => {
-  it("validates required fields", () => {
+describe('add-series schema', () => {
+  it('validates required fields', () => {
     const valid = toolSchema.safeParse({
-      title: "Test Series",
+      title: 'Test Series',
       tvdbId: 999,
     });
     expect(valid.success).toBe(true);
   });
 
-  it("fails without required fields", () => {
+  it('fails without required fields', () => {
     const invalid = toolSchema.safeParse({});
     expect(invalid.success).toBe(false);
   });
 
-  it("applies default values", () => {
+  it('applies default values', () => {
     const parsed = toolSchema.parse({
-      title: "Test Series",
+      title: 'Test Series',
       tvdbId: 999,
     });
     expect(parsed.qualityProfileId).toBe(1);
-    expect(parsed.rootFolderPath).toBe("/tv");
+    expect(parsed.rootFolderPath).toBe('/tv');
     expect(parsed.monitored).toBe(true);
     expect(parsed.seasonFolder).toBe(true);
     expect(parsed.addOptions).toEqual({ searchForMissingEpisodes: true });
   });
 });
 
-describe("add-series tool", () => {
+describe('add-series tool', () => {
   let originalEnv: NodeJS.ProcessEnv;
 
   beforeEach(() => {
     originalEnv = { ...process.env };
   });
 
-  it("calls SonarrHttpClient.post with correct data and returns expected result", async () => {
+  it('calls SonarrHttpClient.post with correct data and returns expected result', async () => {
     const data = {
-      title: "Test Series",
+      title: 'Test Series',
       tvdbId: 999,
       qualityProfileId: 1,
-      rootFolderPath: "/tv",
+      rootFolderPath: '/tv',
       monitored: true,
       seasonFolder: true,
       languageProfileId: 2,
@@ -66,7 +66,7 @@ describe("add-series tool", () => {
       addOptions: { searchForMissingEpisodes: true },
     };
     const result = await toolHandler(data);
-    expect(result.content?.[0]?.text).toContain("Test Series");
-    expect(result.content?.[0]?.type).toBe("text");
+    expect(result.content?.[0]?.text).toContain('Test Series');
+    expect(result.content?.[0]?.type).toBe('text');
   });
 });

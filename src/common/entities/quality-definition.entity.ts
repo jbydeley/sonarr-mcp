@@ -1,13 +1,5 @@
-import { z } from "zod";
-
-export const QualitySchema = z.object({
-  id: z.number(),
-  name: z.string(),
-  source: z.string(),
-  resolution: z.number(),
-});
-
-export type Quality = z.infer<typeof QualitySchema>;
+import { z } from 'zod';
+import { QualitySchema } from './quality.entity.js';
 
 export const QualityDefinitionSchema = z.object({
   id: z.number(),

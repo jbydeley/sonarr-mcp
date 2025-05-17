@@ -11,12 +11,19 @@
     "url": "git+https://github.com/jbydeley/sonarr-mcp.git"
   },
   "scripts": {
-    "build": "tsc && tsc-alias && chmod +x dist/src/main.js",
+    "build": "npm run clean && tsc && tsc-alias && chmod +x dist/src/main.js",
+    "clean": "rimraf dist",
     "start": "tsx ./src/api/index.ts",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "lint": "biome lint",
+    "fix:all": "biome check --write"
+  },
+  "engines": {
+    "node": ">=20"
   },
   "devDependencies": {
+    "@biomejs/biome": "1.9.4",
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/commit-analyzer": "^13.0.1",
     "@semantic-release/git": "^10.0.1",
@@ -27,6 +34,7 @@
     "@vitest/coverage-v8": "3.1.2",
     "nock": "^14.0.4",
     "plop": "^4.0.1",
+    "rimraf": "^6.0.1",
     "semantic-release": "^24.2.3",
     "tsc-alias": "^1.8.16",
     "tsx": "^4.19.4",
