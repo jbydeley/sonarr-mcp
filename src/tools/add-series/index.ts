@@ -46,9 +46,7 @@ export const toolHandler = async (
 ): Promise<CallToolResult> => {
   const sonarrHttpClient = new SonarrHttpClient();
 
-  const series = await sonarrHttpClient.post<Series>('/api/v3/series', {
-    data,
-  });
+  const series = await sonarrHttpClient.post<Series>('/api/v3/series', data).catch(err => console.error(err));
 
   return {
     content: [
