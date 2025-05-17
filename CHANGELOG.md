@@ -1,3 +1,10 @@
+## [1.4.1](https://github.com/jbydeley/sonarr-mcp/compare/v1.4.0...v1.4.1) (2025-05-17)
+
+
+### Bug Fixes
+
+* **node:** support older versions of node ([#15](https://github.com/jbydeley/sonarr-mcp/issues/15)) ([7275610](https://github.com/jbydeley/sonarr-mcp/commit/7275610ca57c37ca83af986e3f8bc512284b7379))
+
 # [1.4.0](https://github.com/jbydeley/sonarr-mcp/compare/v1.3.0...v1.4.0) (2025-05-09)
 
 
