@@ -1,6 +1,9 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { readdirSync } from "fs";
-import { join } from "path";
+import { join, dirname } from "path";
+import { fileURLToPath } from "url";
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 export const server = new McpServer({
   name: "Sonarr",
@@ -11,7 +14,8 @@ export const server = new McpServer({
   },
 });
 
-const resourceDirs = readdirSync(join(import.meta.dirname, "../resources"));
+const resourceDirs = readdirSync(join(__dirname, "../resources"));
+
 for (const dir of resourceDirs) {
   const mod = await import(`../resources/${dir}/index.js`);
   if (mod.enabled) {
@@ -19,7 +23,7 @@ for (const dir of resourceDirs) {
   }
 }
 
-const toolDirs = readdirSync(join(import.meta.dirname, "../tools"));
+const toolDirs = readdirSync(join(__dirname, "../tools"));
 for (const dir of toolDirs) {
   const mod = await import(`../tools/${dir}/index.js`);
   if (mod.enabled) {
