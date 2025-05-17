@@ -1,3 +1,10 @@
+## [1.4.2](https://github.com/jbydeley/sonarr-mcp/compare/v1.4.1...v1.4.2) (2025-05-17)
+
+
+### Bug Fixes
+
+* **lint:** add biome for lint and formatting ([#16](https://github.com/jbydeley/sonarr-mcp/issues/16)) ([6be7ecc](https://github.com/jbydeley/sonarr-mcp/commit/6be7ecc8f7623aa4371a73428452bc7380756b76))
+
 ## [1.4.1](https://github.com/jbydeley/sonarr-mcp/compare/v1.4.0...v1.4.1) (2025-05-17)
 
 
