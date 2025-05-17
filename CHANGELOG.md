@@ -1,3 +1,10 @@
+## [1.4.3](https://github.com/jbydeley/sonarr-mcp/compare/v1.4.2...v1.4.3) (2025-05-17)
+
+
+### Bug Fixes
+
+* **add:** add series bad request ([#17](https://github.com/jbydeley/sonarr-mcp/issues/17)) ([3a0aeec](https://github.com/jbydeley/sonarr-mcp/commit/3a0aeec8df116633390e87c51c3f91f3e01933c9))
+
 ## [1.4.2](https://github.com/jbydeley/sonarr-mcp/compare/v1.4.1...v1.4.2) (2025-05-17)
 
 
