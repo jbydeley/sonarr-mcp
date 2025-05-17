@@ -1,5 +1,5 @@
-import { z } from "zod";
-import { HistoryRecordSchema } from "./history-record.entity.js";
+import { z } from 'zod';
+import { HistoryRecordSchema } from './history-record.entity.js';
 
 export const HistoryResponseSchema = z.object({
   page: z.number(),

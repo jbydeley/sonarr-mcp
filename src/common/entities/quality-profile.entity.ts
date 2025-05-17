@@ -1,4 +1,6 @@
-import { z } from "zod";
+import { z } from 'zod';
+import { QualitySchema } from './quality.entity.js';
+import { CustomFormatSchema } from './custom-format.entity.js';
 
 export const QualityProfileSchema = z.object({
   id: z.number(),
@@ -9,27 +11,15 @@ export const QualityProfileSchema = z.object({
     z.object({
       id: z.number(),
       name: z.string(),
-      quality: z.object({
-        id: z.number(),
-        name: z.string(),
-        source: z.string(),
-        resolution: z.number(),
-      }),
+      quality: QualitySchema,
       items: z.array(z.string()),
       allowed: z.boolean(),
-    })
+    }),
   ),
   minFormatScore: z.number(),
   cutoffFormatScore: z.number(),
   minUpgradeFormatScore: z.number(),
-  formatItems: z.array(
-    z.object({
-      id: z.number(),
-      format: z.number(),
-      name: z.string(),
-      score: z.number(),
-    })
-  ),
+  formatItems: z.array(CustomFormatSchema),
 });
 
 export type QualityProfile = z.infer<typeof QualityProfileSchema>;

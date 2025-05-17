@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const QualitySchema = z.object({
   id: z.number(),
@@ -7,4 +7,5 @@ export const QualitySchema = z.object({
   resolution: z.number(),
   modifier: z.string().optional(),
 });
+
 export type Quality = z.infer<typeof QualitySchema>;

@@ -1,13 +1,13 @@
-import { defineConfig } from "vitest/config";
-import tsconfigPaths from "vite-tsconfig-paths";
+import tsconfigPaths from 'vite-tsconfig-paths';
+import { defineConfig } from 'vitest/config';
 
 export default defineConfig({
   plugins: [tsconfigPaths()],
-  root: "./src",
+  root: './src',
   test: {
-    setupFiles: ["./test/setup-env.ts"],
+    setupFiles: ['./test/setup-env.ts'],
     coverage: {
-      exclude: ["common/entities/**"],
+      exclude: ['common/entities/**'],
     },
   },
 });

@@ -1,7 +1,8 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const CustomFormatSchema = z.object({
   id: z.number(),
+  format: z.number(),
   name: z.string(),
   score: z.number(),
 });
