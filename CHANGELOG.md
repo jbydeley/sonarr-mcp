@@ -1,3 +1,10 @@
+# [1.5.0](https://github.com/jbydeley/sonarr-mcp/compare/v1.4.3...v1.5.0) (2025-05-31)
+
+
+### Features
+
+* **deps:** update dependencies ([#18](https://github.com/jbydeley/sonarr-mcp/issues/18)) ([794674d](https://github.com/jbydeley/sonarr-mcp/commit/794674dbffbf1e70e2f1390c5d95552dd3183022))
+
 ## [1.4.3](https://github.com/jbydeley/sonarr-mcp/compare/v1.4.2...v1.4.3) (2025-05-17)
 
 
