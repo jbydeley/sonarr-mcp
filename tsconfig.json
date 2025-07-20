@@ -5,23 +5,26 @@
     "moduleResolution": "NodeNext",
     "esModuleInterop": true,
     "allowJs": true,
-
     // Best practices
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true,
     "noFallthroughCasesInSwitch": true,
     "noUncheckedIndexedAccess": true,
-
     // Some stricter flags (disabled by default)
     "noUnusedLocals": false,
     "noUnusedParameters": false,
     "noPropertyAccessFromIndexSignature": false,
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": [
+        "./src/*"
+      ]
     },
     "outDir": "dist",
-    "rootDir": "./"
+    "rootDir": "./",
+    "resolveJsonModule": true
   },
-  "include": ["src/**/*"]
+  "include": [
+    "src/**/*"
+  ]
 }

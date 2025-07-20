@@ -1,6 +1,6 @@
 import nock from 'nock';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
-import * as qualityProfilesResource from './index.js';
+import {qualityProfilesResourceHandler} from '../quality-profiles.js';
 
 describe('quality-profiles resource', () => {
   beforeEach(() => {
@@ -11,18 +11,14 @@ describe('quality-profiles resource', () => {
       throw new Error('Not all nock interceptors were used!');
     }
   });
-  it('should export a resourceUri', () => {
-    expect(qualityProfilesResource.resourceUri).toBeDefined();
-    expect(typeof qualityProfilesResource.resourceUri).toBe('string');
-  });
 
   it('should export a quality-profiles resourceHandler and return mocked data', async () => {
     nock('http://localhost:8989')
       .get('/api/v3/qualityProfile')
       .reply(200, [{ id: 1, name: 'HDTV-720p' }]);
-    expect(typeof qualityProfilesResource.resourceHandler).toBe('function');
-    const result = await qualityProfilesResource.resourceHandler(
-      new URL(qualityProfilesResource.resourceUri),
+    expect(typeof qualityProfilesResourceHandler).toBe('function');
+    const result = await qualityProfilesResourceHandler(
+      new URL('/api/v3/qualityProfile', 'http://localhost:8989'),
       {},
     );
     expect(result).toBeDefined();

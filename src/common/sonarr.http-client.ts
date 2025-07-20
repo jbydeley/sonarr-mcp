@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { env } from './env.js';
 
 export class SonarrHttpClient {
@@ -11,16 +10,18 @@ export class SonarrHttpClient {
 
   async get<T = unknown>(path: string): Promise<T> {
     const url = `${this.baseUrl}${path}`;
-    const response = await axios.get(url, {
+    const response = await fetch(url, {
       headers: this.headers,
     });
-    return response.data;
+    return response.json();
   }
 
   async post<T = unknown>(path: string, body: unknown): Promise<T> {
-    const response = await axios.post(`${this.baseUrl}${path}`, body, {
+    const response = await fetch(`${this.baseUrl}${path}`, {
+      method: 'POST',
       headers: this.headers,
+      body: JSON.stringify(body),
     });
-    return response.data;
+    return response.json();
   }
 }

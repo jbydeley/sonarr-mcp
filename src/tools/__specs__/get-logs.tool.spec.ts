@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
-import { type GetLogsDto, toolHandler, toolSchema } from './index.js';
+import { getLogsHandler, getLogsSchema } from '../get-logs.js';
 
 vi.mock('@/common/sonarr.http-client.js', () => {
   return {
@@ -23,12 +23,12 @@ vi.mock('@/common/sonarr.http-client.js', () => {
 
 describe('get-logs schema', () => {
   it('validates required fields', () => {
-    const valid = toolSchema.safeParse({});
+    const valid = getLogsSchema.safeParse({});
     expect(valid.success).toBe(true);
   });
 
   it('applies default values', () => {
-    const parsed = toolSchema.parse({});
+    const parsed = getLogsSchema.parse({});
     expect(parsed.page).toBe(1);
     expect(parsed.pageSize).toBe(10);
     expect(parsed.sortKey).toBe('date');
@@ -39,14 +39,14 @@ describe('get-logs schema', () => {
 
 describe('get-logs tool', () => {
   it('calls SonarrHttpClient.get and returns expected result', async () => {
-    const data: GetLogsDto = {
+    const data = getLogsSchema.parse({
       page: 1,
       pageSize: 10,
       sortKey: 'date',
       sortDirection: 'default',
       level: 'info',
-    };
-    const result = await toolHandler(data);
+    });
+    const result = await getLogsHandler(data);
     expect(result.content?.[0]?.text).toContain('Test log entry');
     expect(result.content?.[0]?.type).toBe('text');
   });

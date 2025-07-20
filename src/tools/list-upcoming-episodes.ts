@@ -4,9 +4,7 @@ import { toUrlParams } from '@/common/to-url-params.js';
 import type { CallToolResult } from '@modelcontextprotocol/sdk/types.js';
 import { z } from 'zod';
 
-export const enabled = true;
-
-export const toolSchema = z.object({
+export const listUpcomingEpisodesSchema = z.object({
   start: z.coerce
     .date()
     .default(new Date())
@@ -34,12 +32,9 @@ export const toolSchema = z.object({
   tags: z.array(z.string()).nullish().describe('Optional tag IDs'),
 });
 
-export type ListUpcomingEpisodesDto = z.infer<typeof toolSchema>;
+export type ListUpcomingEpisodesDto = z.infer<typeof listUpcomingEpisodesSchema>;
 
-export const toolName = 'list-upcoming-episodes';
-export const toolDescription = 'List upcoming episodes from sonarr';
-
-export const toolHandler = async (
+export const listUpcomingEpisodesHandler = async (
   data: ListUpcomingEpisodesDto,
 ): Promise<CallToolResult> => {
   const sonarrHttpClient = new SonarrHttpClient();

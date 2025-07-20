@@ -4,9 +4,7 @@ import { toUrlParams } from '@/common/to-url-params.js';
 import type { CallToolResult } from '@modelcontextprotocol/sdk/types.js';
 import { z } from 'zod';
 
-export const enabled = true;
-
-export const toolSchema = z.object({
+export const findEpisodesSchema = z.object({
   seriesId: z.number().describe('The ID of the series'),
   seasonNumber: z.number().optional().describe('The season number'),
   episodeIds: z.array(z.number()).optional().nullish(),
@@ -28,12 +26,9 @@ export const toolSchema = z.object({
     .describe('Whether to include episode images'),
 });
 
-export type FindEpisodesDto = z.infer<typeof toolSchema>;
+export type FindEpisodesDto = z.infer<typeof findEpisodesSchema>;
 
-export const toolName = 'find-episodes';
-export const toolDescription = 'Find episodes in Sonarr';
-
-export const toolHandler = async (
+export const findEpisodesHandler = async (
   data: FindEpisodesDto,
 ): Promise<CallToolResult> => {
   const sonarrHttpClient = new SonarrHttpClient();

@@ -1,9 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
-import {
-  type ListUpcomingEpisodesDto,
-  toolHandler,
-  toolSchema,
-} from './index.js';
+import { listUpcomingEpisodesHandler, listUpcomingEpisodesSchema } from '../list-upcoming-episodes.js';
 
 vi.mock('@/common/sonarr.http-client.js', () => {
   return {
@@ -25,12 +21,12 @@ vi.mock('@/common/sonarr.http-client.js', () => {
 
 describe('list-upcoming-episodes schema', () => {
   it('validates required fields (none required)', () => {
-    const valid = toolSchema.safeParse({});
+    const valid = listUpcomingEpisodesSchema.safeParse({});
     expect(valid.success).toBe(true);
   });
 
   it('applies default values', () => {
-    const parsed = toolSchema.parse({});
+    const parsed = listUpcomingEpisodesSchema.parse({});
     expect(parsed.unmonitored).toBe(false);
     expect(parsed.includeSeries).toBe(false);
     expect(parsed.includeEpisodeFile).toBe(false);
@@ -40,15 +36,15 @@ describe('list-upcoming-episodes schema', () => {
 
 describe('list-upcoming-episodes tool', () => {
   it('calls SonarrHttpClient.get and returns expected result', async () => {
-    const data: ListUpcomingEpisodesDto = {
+    const data = listUpcomingEpisodesSchema.parse({
       start: new Date(),
       end: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
       includeSeries: false,
       includeEpisodeFile: false,
       includeEpisodeImages: false,
       unmonitored: false,
-    };
-    const result = await toolHandler(data);
+    });
+    const result = await listUpcomingEpisodesHandler(data);
     expect(result.content?.[0]?.text).toContain('Upcoming Episode');
     expect(result.content?.[0]?.type).toBe('text');
   });

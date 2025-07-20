@@ -4,9 +4,7 @@ import { toUrlParams } from '@/common/to-url-params.js';
 import type { CallToolResult } from '@modelcontextprotocol/sdk/types.js';
 import { z } from 'zod';
 
-export const enabled = true;
-
-export const toolSchema = z.object({
+export const getLogsSchema = z.object({
   page: z.number().default(1),
   pageSize: z.number().default(10),
   sortKey: z.string().default('date'),
@@ -16,12 +14,9 @@ export const toolSchema = z.object({
   level: z.enum(['debug', 'info', 'warning', 'error']).default('info'),
 });
 
-export type GetLogsDto = z.infer<typeof toolSchema>;
+export type GetLogsDto = z.infer<typeof getLogsSchema>;
 
-export const toolName = 'get-logs';
-export const toolDescription = 'Get paginated logs from Sonarr';
-
-export const toolHandler = async (
+export const getLogsHandler = async (
   data: GetLogsDto,
 ): Promise<CallToolResult> => {
   const sonarrHttpClient = new SonarrHttpClient();
