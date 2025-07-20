@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
-import { toolHandler, toolSchema } from './index.js';
+import { listRecentDownloadsHandler, listRecentDownloadsSchema } from '../list-recent-downloads.js';
 
 vi.mock('@/common/sonarr.http-client.js', () => {
   return {
@@ -20,12 +20,12 @@ vi.mock('@/common/sonarr.http-client.js', () => {
 
 describe('list-recent-downloads schema', () => {
   it('validates required fields (none required)', () => {
-    const valid = toolSchema.safeParse({});
+    const valid = listRecentDownloadsSchema.safeParse({});
     expect(valid.success).toBe(true);
   });
 
   it('applies default values', () => {
-    const parsed = toolSchema.parse({});
+    const parsed = listRecentDownloadsSchema.parse({});
     expect(parsed.page).toBe(1);
     expect(parsed.pageSize).toBe(10);
     expect(parsed.sortKey).toBe('date');
@@ -37,7 +37,7 @@ describe('list-recent-downloads schema', () => {
 
 describe('list-recent-downloads tool', () => {
   it('calls SonarrHttpClient.get and returns expected result', async () => {
-    const data = toolSchema.parse({
+    const data = listRecentDownloadsSchema.parse({
       page: 1,
       pageSize: 10,
       sortKey: 'date',
@@ -48,7 +48,7 @@ describe('list-recent-downloads tool', () => {
       seriesIds: [1],
       quality: [1],
     });
-    const result = await toolHandler(data);
+    const result = await listRecentDownloadsHandler(data);
     expect(result.content?.[0]?.text).toContain('eventType');
     expect(result.content?.[0]?.type).toBe('text');
   });

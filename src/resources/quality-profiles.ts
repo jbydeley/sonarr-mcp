@@ -2,12 +2,7 @@ import type { QualityProfile } from '@/common/entities/quality-profile.entity.js
 import { SonarrHttpClient } from '@/common/sonarr.http-client.js';
 import type { ReadResourceResult } from '@modelcontextprotocol/sdk/types.js';
 
-export const enabled = true;
-
-export const resourceName = 'quality-profiles';
-export const resourceUri = 'sonarr://quality-profiles';
-
-export const resourceHandler = async (
+export const qualityProfilesResourceHandler = async (
   uri: URL,
   _extra: Record<string, unknown>,
 ): Promise<ReadResourceResult> => {

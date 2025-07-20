@@ -3,18 +3,13 @@ import { SonarrHttpClient } from '@/common/sonarr.http-client.js';
 import type { CallToolResult } from '@modelcontextprotocol/sdk/types.js';
 import { z } from 'zod';
 
-export const enabled = true;
-
-export const toolSchema = z.object({
+export const searchSeriesSchema = z.object({
   term: z.string().describe('The term to search for'),
 });
 
-export type SearchSeriesDto = z.infer<typeof toolSchema>;
+export type SearchSeriesDto = z.infer<typeof searchSeriesSchema>;
 
-export const toolName = 'search-series';
-export const toolDescription = 'Search for a TV series by term';
-
-export const toolHandler = async (
+export const searchSeriesHandler = async (
   data: SearchSeriesDto,
 ): Promise<CallToolResult> => {
   const sonarrHttpClient = new SonarrHttpClient();

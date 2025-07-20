@@ -3,9 +3,7 @@ import { SonarrHttpClient } from '@/common/sonarr.http-client.js';
 import type { CallToolResult } from '@modelcontextprotocol/sdk/types.js';
 import { z } from 'zod';
 
-export const enabled = true;
-
-export const toolSchema = z.object({
+export const addSeriesSchema = z.object({
   title: z.string().describe('The title of the show to add'),
   tvdbId: z.number().min(1).describe('The TVDB ID of the show to add'),
   qualityProfileId: z
@@ -36,12 +34,9 @@ export const toolSchema = z.object({
     .default({ searchForMissingEpisodes: true }),
 });
 
-export type AddSeriesDto = z.infer<typeof toolSchema>;
+export type AddSeriesDto = z.infer<typeof addSeriesSchema>;
 
-export const toolName = 'add-series';
-export const toolDescription = 'Add series to Sonarr';
-
-export const toolHandler = async (
+export const addSeriesHandler = async (
   data: AddSeriesDto,
 ): Promise<CallToolResult> => {
   const sonarrHttpClient = new SonarrHttpClient();

@@ -4,8 +4,6 @@ import { toUrlParams } from '@/common/to-url-params.js';
 import type { CallToolResult } from '@modelcontextprotocol/sdk/types.js';
 import { z } from 'zod';
 
-export const enabled = true;
-
 export const eventTypes = [
   'Unknown',
   'Grabbed',
@@ -17,7 +15,7 @@ export const eventTypes = [
   'DownloadIgnored',
 ] as const;
 
-export const toolSchema = z.object({
+export const listRecentDownloadsSchema = z.object({
   page: z.number().default(1).describe('The page number'),
   pageSize: z.number().default(10).describe('The page size'),
   sortKey: z.string().default('date').describe('The sort key'),
@@ -45,12 +43,9 @@ export const toolSchema = z.object({
   quality: z.array(z.number()).nullish().describe('The quality IDs'),
 });
 
-export type ListRecentDownloadsDto = z.infer<typeof toolSchema>;
+export type ListRecentDownloadsDto = z.infer<typeof listRecentDownloadsSchema>;
 
-export const toolName = 'list-recent-downloads';
-export const toolDescription = 'List recent downloads from Sonarr';
-
-export const toolHandler = async (
+export const listRecentDownloadsHandler = async (
   data: ListRecentDownloadsDto,
 ): Promise<CallToolResult> => {
   const sonarrHttpClient = new SonarrHttpClient();

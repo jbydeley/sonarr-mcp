@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { toolHandler, toolSchema } from './index.js';
+import { addSeriesHandler, addSeriesSchema } from '../add-series.js';
 
 vi.mock('@/common/sonarr.http-client.js', () => {
   return {
@@ -21,7 +21,7 @@ vi.mock('@/common/sonarr.http-client.js', () => {
 
 describe('add-series schema', () => {
   it('validates required fields', () => {
-    const valid = toolSchema.safeParse({
+    const valid = addSeriesSchema.safeParse({
       title: 'Test Series',
       tvdbId: 999,
     });
@@ -29,12 +29,12 @@ describe('add-series schema', () => {
   });
 
   it('fails without required fields', () => {
-    const invalid = toolSchema.safeParse({});
+    const invalid = addSeriesSchema.safeParse({});
     expect(invalid.success).toBe(false);
   });
 
   it('applies default values', () => {
-    const parsed = toolSchema.parse({
+    const parsed = addSeriesSchema.parse({
       title: 'Test Series',
       tvdbId: 999,
     });
@@ -65,7 +65,7 @@ describe('add-series tool', () => {
       tags: [1, 2],
       addOptions: { searchForMissingEpisodes: true },
     };
-    const result = await toolHandler(data);
+    const result = await addSeriesHandler(data);
     expect(result.content?.[0]?.text).toContain('Test Series');
     expect(result.content?.[0]?.type).toBe('text');
   });

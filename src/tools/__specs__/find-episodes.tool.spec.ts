@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
-import { toolHandler, toolSchema } from './index.js';
+import { findEpisodesHandler, findEpisodesSchema } from '../find-episodes.js';
 
 vi.mock('@/common/sonarr.http-client.js', () => {
   return {
@@ -21,19 +21,19 @@ vi.mock('@/common/sonarr.http-client.js', () => {
 
 describe('find-episodes schema', () => {
   it('validates required fields', () => {
-    const valid = toolSchema.safeParse({
+    const valid = findEpisodesSchema.safeParse({
       seriesId: 100,
     });
     expect(valid.success).toBe(true);
   });
 
   it('fails without required fields', () => {
-    const invalid = toolSchema.safeParse({});
+    const invalid = findEpisodesSchema.safeParse({});
     expect(invalid.success).toBe(false);
   });
 
   it('applies default values', () => {
-    const parsed = toolSchema.parse({
+    const parsed = findEpisodesSchema.parse({
       seriesId: 100,
     });
     expect(parsed.includeSeries).toBe(false);
@@ -44,16 +44,16 @@ describe('find-episodes schema', () => {
 
 describe('find-episodes tool', () => {
   it('calls SonarrHttpClient.get with minimal params and returns expected result', async () => {
-    const data = toolSchema.parse({
+    const data = findEpisodesSchema.parse({
       seriesId: 100,
     });
-    const result = await toolHandler(data);
+    const result = await findEpisodesHandler(data);
     expect(result.content?.[0]?.text).toContain('Test Episode');
     expect(result.content?.[0]?.type).toBe('text');
   });
 
   it('calls SonarrHttpClient.get with all params and returns expected result', async () => {
-    const data = toolSchema.parse({
+    const data = findEpisodesSchema.parse({
       seriesId: 100,
       seasonNumber: 2,
       includeSeries: true,
@@ -62,7 +62,7 @@ describe('find-episodes tool', () => {
       episodeIds: [1],
       episodeFileId: 1,
     });
-    const result = await toolHandler(data);
+    const result = await findEpisodesHandler(data);
     expect(result.content?.[0]?.text).toContain('Test Episode');
     expect(result.content?.[0]?.type).toBe('text');
   });
