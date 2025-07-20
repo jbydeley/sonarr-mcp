@@ -5,13 +5,14 @@ export class SonarrHttpClient {
   private readonly apiKey = env.SONARR_API_KEY;
 
   private get headers() {
-    return { 'X-Api-Key': this.apiKey };
+    return { 'X-Api-Key': this.apiKey, 'Content-Type': 'application/json' };
   }
 
   async get<T = unknown>(path: string): Promise<T> {
     const url = `${this.baseUrl}${path}`;
     const response = await fetch(url, {
       headers: this.headers,
+      signal: AbortSignal.timeout(10000),
     });
     return response.json();
   }

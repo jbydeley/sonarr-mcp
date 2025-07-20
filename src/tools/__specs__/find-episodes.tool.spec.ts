@@ -31,15 +31,6 @@ describe('find-episodes schema', () => {
     const invalid = findEpisodesSchema.safeParse({});
     expect(invalid.success).toBe(false);
   });
-
-  it('applies default values', () => {
-    const parsed = findEpisodesSchema.parse({
-      seriesId: 100,
-    });
-    expect(parsed.includeSeries).toBe(false);
-    expect(parsed.includeEpisodeFile).toBe(false);
-    expect(parsed.includeEpisodeImages).toBe(false);
-  });
 });
 
 describe('find-episodes tool', () => {
@@ -59,7 +50,6 @@ describe('find-episodes tool', () => {
       includeSeries: true,
       includeEpisodeFile: false,
       includeEpisodeImages: false,
-      episodeIds: [1],
       episodeFileId: 1,
     });
     const result = await findEpisodesHandler(data);

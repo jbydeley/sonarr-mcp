@@ -1,7 +1,7 @@
 import { z } from 'zod';
+import { CustomFormatSchema } from './custom-format.entity.js';
 import { LanguageSchema } from './language.entity.js';
 import { QualitySchema } from './quality.entity.js';
-import { CustomFormatSchema } from './custom-format.entity.js';
 
 export const EpisodeFileSchema = z.object({
   id: z.number(),

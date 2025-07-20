@@ -1,6 +1,6 @@
 import nock from 'nock';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
-import {qualityProfilesResourceHandler} from '../quality-profiles.js';
+import { qualityProfilesResourceHandler } from '../quality-profiles.js';
 
 describe('quality-profiles resource', () => {
   beforeEach(() => {

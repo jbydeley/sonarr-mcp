@@ -1,8 +1,8 @@
+import type { CallToolResult } from '@modelcontextprotocol/sdk/types.js';
+import { z } from 'zod';
 import type { LogsResponse } from '@/common/entities/log.entity.js';
 import { SonarrHttpClient } from '@/common/sonarr.http-client.js';
 import { toUrlParams } from '@/common/to-url-params.js';
-import type { CallToolResult } from '@modelcontextprotocol/sdk/types.js';
-import { z } from 'zod';
 
 export const getLogsSchema = z.object({
   page: z.number().default(1),

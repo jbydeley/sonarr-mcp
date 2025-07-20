@@ -1,6 +1,6 @@
 import nock from 'nock';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
-import {seriesResourceHandler} from '../series.js';
+import { seriesResourceHandler } from '../series.js';
 
 describe('series resource', () => {
   beforeEach(() => {

@@ -1,9 +1,9 @@
+import { z } from 'zod';
 import { CustomFormatSchema } from '@/common/entities/custom-format.entity.js';
 import { EpisodeSchema } from '@/common/entities/episode.entity.js';
 import { LanguageSchema } from '@/common/entities/language.entity.js';
 import { QualitySchema } from '@/common/entities/quality.entity.js';
 import { SeriesSchema } from '@/common/entities/series.entity.js';
-import { z } from 'zod';
 
 export const HistoryRecordSchema = z.object({
   id: z.number(),

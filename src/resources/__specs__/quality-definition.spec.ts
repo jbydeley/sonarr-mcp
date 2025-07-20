@@ -1,6 +1,6 @@
 import nock from 'nock';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
-import {qualityDefinitionResourceHandler} from '../quality-definition.js';
+import { qualityDefinitionResourceHandler } from '../quality-definition.js';
 
 describe('quality-definition resource', () => {
   beforeEach(() => {

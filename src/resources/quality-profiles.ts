@@ -1,6 +1,6 @@
+import type { ReadResourceResult } from '@modelcontextprotocol/sdk/types.js';
 import type { QualityProfile } from '@/common/entities/quality-profile.entity.js';
 import { SonarrHttpClient } from '@/common/sonarr.http-client.js';
-import type { ReadResourceResult } from '@modelcontextprotocol/sdk/types.js';
 
 export const qualityProfilesResourceHandler = async (
   uri: URL,
