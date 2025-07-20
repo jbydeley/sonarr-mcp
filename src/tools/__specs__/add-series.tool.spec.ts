@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { addSeriesHandler, addSeriesSchema } from '../add-series.js';
 
 vi.mock('@/common/sonarr.http-client.js', () => {
@@ -47,12 +47,6 @@ describe('add-series schema', () => {
 });
 
 describe('add-series tool', () => {
-  let originalEnv: NodeJS.ProcessEnv;
-
-  beforeEach(() => {
-    originalEnv = { ...process.env };
-  });
-
   it('calls SonarrHttpClient.post with correct data and returns expected result', async () => {
     const data = {
       title: 'Test Series',

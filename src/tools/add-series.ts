@@ -1,7 +1,7 @@
-import type { Series } from '@/common/entities/series.entity.js';
-import { SonarrHttpClient } from '@/common/sonarr.http-client.js';
 import type { CallToolResult } from '@modelcontextprotocol/sdk/types.js';
 import { z } from 'zod';
+import type { Series } from '@/common/entities/series.entity.js';
+import { SonarrHttpClient } from '@/common/sonarr.http-client.js';
 
 export const addSeriesSchema = z.object({
   title: z.string().describe('The title of the show to add'),
@@ -41,7 +41,9 @@ export const addSeriesHandler = async (
 ): Promise<CallToolResult> => {
   const sonarrHttpClient = new SonarrHttpClient();
 
-  const series = await sonarrHttpClient.post<Series>('/api/v3/series', data).catch(err => console.error(err));
+  const series = await sonarrHttpClient
+    .post<Series>('/api/v3/series', data)
+    .catch((err) => console.error(err));
 
   return {
     content: [

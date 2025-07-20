@@ -1,9 +1,9 @@
+import { z } from 'zod';
 import { ImageSchema } from '@/common/entities/image.entity.js';
 import { OriginalLanguageSchema } from '@/common/entities/original-language.entity.js';
 import { RatingsSchema } from '@/common/entities/ratings.entity.js';
 import { SeasonSchema } from '@/common/entities/season.entity.js';
 import { StatisticsSchema } from '@/common/entities/statistics.entity.js';
-import { z } from 'zod';
 
 export const SeriesSchema = z.object({
   title: z.string(),

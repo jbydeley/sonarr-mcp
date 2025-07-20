@@ -1,8 +1,8 @@
+import type { CallToolResult } from '@modelcontextprotocol/sdk/types.js';
+import { z } from 'zod';
 import type { Episode } from '@/common/entities/episode.entity.js';
 import { SonarrHttpClient } from '@/common/sonarr.http-client.js';
 import { toUrlParams } from '@/common/to-url-params.js';
-import type { CallToolResult } from '@modelcontextprotocol/sdk/types.js';
-import { z } from 'zod';
 
 export const listUpcomingEpisodesSchema = z.object({
   start: z.coerce
@@ -32,7 +32,9 @@ export const listUpcomingEpisodesSchema = z.object({
   tags: z.array(z.string()).nullish().describe('Optional tag IDs'),
 });
 
-export type ListUpcomingEpisodesDto = z.infer<typeof listUpcomingEpisodesSchema>;
+export type ListUpcomingEpisodesDto = z.infer<
+  typeof listUpcomingEpisodesSchema
+>;
 
 export const listUpcomingEpisodesHandler = async (
   data: ListUpcomingEpisodesDto,

@@ -1,7 +1,7 @@
-import { EpisodeFileSchema } from '@/common/entities/episode-file.entity.js';
 import { z } from 'zod';
-import { SeriesSchema } from './series.entity.js';
+import { EpisodeFileSchema } from '@/common/entities/episode-file.entity.js';
 import { ImageSchema } from './image.entity.js';
+import { SeriesSchema } from './series.entity.js';
 
 export const EpisodeSchema = z.object({
   id: z.number(),

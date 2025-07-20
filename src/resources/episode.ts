@@ -1,6 +1,6 @@
+import type { ReadResourceResult } from '@modelcontextprotocol/sdk/types.js';
 import type { Episode } from '@/common/entities/episode.entity.js';
 import { SonarrHttpClient } from '@/common/sonarr.http-client.js';
-import type { ReadResourceResult } from '@modelcontextprotocol/sdk/types.js';
 
 export const episodeResourceHandler = async (
   uri: URL,

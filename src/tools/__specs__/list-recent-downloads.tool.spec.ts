@@ -1,5 +1,8 @@
 import { describe, expect, it, vi } from 'vitest';
-import { listRecentDownloadsHandler, listRecentDownloadsSchema } from '../list-recent-downloads.js';
+import {
+  listRecentDownloadsHandler,
+  listRecentDownloadsSchema,
+} from '../list-recent-downloads.js';
 
 vi.mock('@/common/sonarr.http-client.js', () => {
   return {

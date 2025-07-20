@@ -1,6 +1,6 @@
 import { z } from 'zod';
-import { QualitySchema } from './quality.entity.js';
 import { CustomFormatSchema } from './custom-format.entity.js';
+import { QualitySchema } from './quality.entity.js';
 
 export const QualityProfileSchema = z.object({
   id: z.number(),

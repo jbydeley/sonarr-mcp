@@ -1,7 +1,7 @@
-import type { Series } from '@/common/entities/series.entity.js';
-import { SonarrHttpClient } from '@/common/sonarr.http-client.js';
 import type { CallToolResult } from '@modelcontextprotocol/sdk/types.js';
 import { z } from 'zod';
+import type { Series } from '@/common/entities/series.entity.js';
+import { SonarrHttpClient } from '@/common/sonarr.http-client.js';
 
 export const searchSeriesSchema = z.object({
   term: z.string().describe('The term to search for'),

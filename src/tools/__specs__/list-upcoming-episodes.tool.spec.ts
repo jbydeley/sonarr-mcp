@@ -1,5 +1,8 @@
 import { describe, expect, it, vi } from 'vitest';
-import { listUpcomingEpisodesHandler, listUpcomingEpisodesSchema } from '../list-upcoming-episodes.js';
+import {
+  listUpcomingEpisodesHandler,
+  listUpcomingEpisodesSchema,
+} from '../list-upcoming-episodes.js';
 
 vi.mock('@/common/sonarr.http-client.js', () => {
   return {
