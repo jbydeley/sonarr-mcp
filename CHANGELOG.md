@@ -1,3 +1,11 @@
+# [1.6.0](https://github.com/jbydeley/sonarr-mcp/compare/v1.5.0...v1.6.0) (2025-07-20)
+
+
+### Features
+
+* **arch:** Simplify and update to latest ([a774a19](https://github.com/jbydeley/sonarr-mcp/commit/a774a19718763f9d1c60ce4cc382d6d53a43a7ef))
+* big refactor to simplify architecture ([5d12d14](https://github.com/jbydeley/sonarr-mcp/commit/5d12d14d6201664b5157e6adff56bf8fac77ff76))
+
 # [1.5.0](https://github.com/jbydeley/sonarr-mcp/compare/v1.4.3...v1.5.0) (2025-05-31)
 
 
