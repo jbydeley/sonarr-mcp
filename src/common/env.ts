@@ -1,7 +1,7 @@
 import { config } from 'dotenv';
 import { z } from 'zod';
 
-config();
+config({ quiet: true });
 
 const envSchema = z.object({
   SONARR_URL: z.string().url(),
