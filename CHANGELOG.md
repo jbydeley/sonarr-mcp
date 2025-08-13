@@ -1,3 +1,10 @@
+## [1.6.1](https://github.com/jbydeley/sonarr-mcp/compare/v1.6.0...v1.6.1) (2025-08-13)
+
+
+### Bug Fixes
+
+* 🐛 quiet dotenv ([690b31e](https://github.com/jbydeley/sonarr-mcp/commit/690b31e8eeca9e143932fbe75c1aa97db2e7b434))
+
 # [1.6.0](https://github.com/jbydeley/sonarr-mcp/compare/v1.5.0...v1.6.0) (2025-07-20)
 
 
