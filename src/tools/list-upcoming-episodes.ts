@@ -5,14 +5,14 @@ import { SonarrHttpClient } from '@/common/sonarr.http-client.js';
 import { toUrlParams } from '@/common/to-url-params.js';
 
 export const listUpcomingEpisodesSchema = z.object({
-  start: z.coerce
-    .date()
-    .default(new Date())
-    .describe('The start date (ISO8601 string or JS Date)'),
-  end: z.coerce
-    .date()
-    .default(new Date(Date.now() + 7 * 24 * 60 * 60 * 1000))
-    .describe('The end date (ISO8601 string or JS Date)'),
+  start: z
+    .string()
+    .default(new Date().toISOString())
+    .describe('The start date (ISO8601 string)'),
+  end: z
+    .string()
+    .default(new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString())
+    .describe('The end date (ISO8601 string)'),
   unmonitored: z
     .boolean()
     .default(false)
@@ -43,8 +43,8 @@ export const listUpcomingEpisodesHandler = async (
 
   const params = toUrlParams(data);
 
-  params.set('start', data.start.toISOString());
-  params.set('end', data.end.toISOString());
+  params.set('start', new Date(data.start).toISOString());
+  params.set('end', new Date(data.end).toISOString());
 
   const upcomingEpisodes = await sonarrHttpClient.get<Episode[]>(
     `/api/v3/calendar?${params.toString()}`,

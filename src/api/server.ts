@@ -5,10 +5,6 @@ import { resources, resourceTemplates, tools } from '../registry.js';
 export const server = new McpServer({
   name: 'Sonarr',
   version: pkg.version,
-  capabilities: {
-    tools: {},
-    resources: {},
-  },
 });
 
 for (const resource of resourceTemplates) {

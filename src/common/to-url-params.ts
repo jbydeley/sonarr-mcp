@@ -5,7 +5,9 @@ export const toUrlParams = (input: Record<string, unknown>) => {
     .filter(([_, v]) => v !== undefined && v !== null)
     .forEach(([k, v]) => {
       if (Array.isArray(v)) {
-        v.forEach((item) => params.append(k, String(item)));
+        v.forEach((item) => {
+          params.append(k, String(item));
+        });
       } else {
         params.append(k, String(v));
       }
