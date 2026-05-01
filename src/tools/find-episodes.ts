@@ -5,9 +5,9 @@ import { SonarrHttpClient } from '@/common/sonarr.http-client.js';
 import { toUrlParams } from '@/common/to-url-params.js';
 
 export const findEpisodesSchema = z.object({
-  seriesId: z.number().describe('The ID of the series'),
-  seasonNumber: z.number().optional().describe('The season number'),
-  episodeFileId: z.number().optional().describe('The episode file ID'),
+  seriesId: z.number().int().positive().describe('The ID of the series'),
+  seasonNumber: z.number().int().positive().optional().describe('The season number'),
+  episodeFileId: z.number().int().positive().optional().describe('The episode file ID'),
   includeSeries: z
     .boolean()
     .optional()

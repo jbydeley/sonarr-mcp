@@ -4,33 +4,39 @@ import type { Episode } from '@/common/entities/episode.entity.js';
 import { SonarrHttpClient } from '@/common/sonarr.http-client.js';
 import { toUrlParams } from '@/common/to-url-params.js';
 
-export const listUpcomingEpisodesSchema = z.object({
-  start: z
-    .string()
-    .default(new Date().toISOString())
-    .describe('The start date (ISO8601 string)'),
-  end: z
-    .string()
-    .default(new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString())
-    .describe('The end date (ISO8601 string)'),
-  unmonitored: z
-    .boolean()
-    .default(false)
-    .describe('Whether to include unmonitored episodes'),
-  includeSeries: z
-    .boolean()
-    .default(false)
-    .describe('Whether to include series information'),
-  includeEpisodeFile: z
-    .boolean()
-    .default(false)
-    .describe('Whether to include episode file information'),
-  includeEpisodeImages: z
-    .boolean()
-    .default(false)
-    .describe('Whether to include episode images'),
-  tags: z.array(z.string()).nullish().describe('Optional tag IDs'),
-});
+export const listUpcomingEpisodesSchema = z
+  .object({
+    start: z
+      .string()
+      .datetime()
+      .default(new Date().toISOString())
+      .describe('The start date (ISO8601 string)'),
+    end: z
+      .string()
+      .datetime()
+      .default(new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString())
+      .describe('The end date (ISO8601 string)'),
+    unmonitored: z
+      .boolean()
+      .default(false)
+      .describe('Whether to include unmonitored episodes'),
+    includeSeries: z
+      .boolean()
+      .default(false)
+      .describe('Whether to include series information'),
+    includeEpisodeFile: z
+      .boolean()
+      .default(false)
+      .describe('Whether to include episode file information'),
+    includeEpisodeImages: z
+      .boolean()
+      .default(false)
+      .describe('Whether to include episode images'),
+    tags: z.array(z.string()).nullish().describe('Optional tag IDs'),
+  })
+  .refine((data) => new Date(data.start) <= new Date(data.end), {
+    message: 'Start date must be before or equal to end date',
+  });
 
 export type ListUpcomingEpisodesDto = z.infer<
   typeof listUpcomingEpisodesSchema
