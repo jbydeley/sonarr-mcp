@@ -46,7 +46,9 @@ export class SonarrHttpClient {
     if (!this.debug) return;
     const duration = Math.round(performance.now() - start);
     const safePath = path.replace(/key=[^&]*/gi, 'key=***');
-    process.stderr.write(`[sonarr-mcp] ${method} ${safePath} ${status} ${duration}ms\n`);
+    process.stderr.write(
+      `[sonarr-mcp] ${method} ${safePath} ${status} ${duration}ms\n`,
+    );
   }
 
   private async handleResponse<T>(response: Response): Promise<T> {

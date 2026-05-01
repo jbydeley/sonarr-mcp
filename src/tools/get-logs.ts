@@ -1,6 +1,6 @@
 import type { CallToolResult } from '@modelcontextprotocol/sdk/types.js';
 import { z } from 'zod';
-import { runSonarrTool } from '@/common/mcp-helpers.js';
+import { createSonarrGateway, runSonarrTool } from '@/common/mcp-helpers.js';
 
 export const getLogsSchema = z.object({
   page: z.number().int().positive().default(1),
@@ -17,5 +17,6 @@ export type GetLogsDto = z.infer<typeof getLogsSchema>;
 export const getLogsHandler = async (
   data: GetLogsDto,
 ): Promise<CallToolResult> => {
-  return runSonarrTool((gateway) => gateway.getLogs(data));
+  const gateway = createSonarrGateway();
+  return runSonarrTool(gateway.getLogs(data));
 };

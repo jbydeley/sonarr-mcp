@@ -1,6 +1,9 @@
 import nock from 'nock';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
-import { listRecentDownloadsHandler, listRecentDownloadsSchema } from '../list-recent-downloads.js';
+import {
+  listRecentDownloadsHandler,
+  listRecentDownloadsSchema,
+} from '../list-recent-downloads.js';
 
 describe('list-recent-downloads schema', () => {
   it('validates required fields', () => {

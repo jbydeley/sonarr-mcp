@@ -3,7 +3,7 @@ import { SonarrGateway } from '@/common/sonarr.gateway.js';
 import { SonarrHttpClient } from '@/common/sonarr.http-client.js';
 import { env } from './env.js';
 
-function createGateway() {
+export function createSonarrGateway() {
   const client = new SonarrHttpClient({
     baseUrl: env.SONARR_URL,
     apiKey: env.SONARR_API_KEY,
@@ -13,12 +13,11 @@ function createGateway() {
 }
 
 export async function runSonarrTool<T>(
-  fn: (gateway: SonarrGateway) => Promise<T>,
+  operation: Promise<T>,
   formatter?: (result: T) => CallToolResult,
 ): Promise<CallToolResult> {
-  const gateway = createGateway();
   try {
-    const result = await fn(gateway);
+    const result = await operation;
     if (formatter) {
       return formatter(result);
     }
@@ -32,11 +31,4 @@ export async function runSonarrTool<T>(
       isError: true,
     };
   }
-}
-
-export async function runSonarrResource<T>(
-  fn: (gateway: SonarrGateway) => Promise<T>,
-): Promise<T> {
-  const gateway = createGateway();
-  return fn(gateway);
 }

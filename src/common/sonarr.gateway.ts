@@ -4,7 +4,7 @@ import type { LogsResponse } from './entities/log.entity.js';
 import type { QualityDefinition } from './entities/quality-definition.entity.js';
 import type { QualityProfile } from './entities/quality-profile.entity.js';
 import type { Series } from './entities/series.entity.js';
-import { SonarrHttpClient } from './sonarr.http-client.js';
+import type { SonarrHttpClient } from './sonarr.http-client.js';
 import { toUrlParams } from './to-url-params.js';
 
 export class SonarrGateway {
@@ -12,7 +12,9 @@ export class SonarrGateway {
 
   async searchSeries(term: string): Promise<Series[]> {
     const params = new URLSearchParams({ term });
-    return this.client.get<Series[]>(`/api/v3/series/lookup?${params.toString()}`);
+    return this.client.get<Series[]>(
+      `/api/v3/series/lookup?${params.toString()}`,
+    );
   }
 
   async addSeries(body: unknown): Promise<Series> {
@@ -29,12 +31,18 @@ export class SonarrGateway {
     return this.client.get<LogsResponse>(`/api/v3/log?${params.toString()}`);
   }
 
-  async listRecentDownloads(query: Record<string, unknown>): Promise<HistoryRecord[]> {
+  async listRecentDownloads(
+    query: Record<string, unknown>,
+  ): Promise<HistoryRecord[]> {
     const params = toUrlParams(query);
-    return this.client.get<HistoryRecord[]>(`/api/v3/history?${params.toString()}`);
+    return this.client.get<HistoryRecord[]>(
+      `/api/v3/history?${params.toString()}`,
+    );
   }
 
-  async listUpcomingEpisodes(query: Record<string, unknown>): Promise<Episode[]> {
+  async listUpcomingEpisodes(
+    query: Record<string, unknown>,
+  ): Promise<Episode[]> {
     const params = toUrlParams(query);
     if (typeof query.start === 'string') {
       params.set('start', new Date(query.start).toISOString());

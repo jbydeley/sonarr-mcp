@@ -1,13 +1,12 @@
 import type { ReadResourceResult } from '@modelcontextprotocol/sdk/types.js';
-import { runSonarrResource } from '@/common/mcp-helpers.js';
+import { createSonarrGateway } from '@/common/mcp-helpers.js';
 
 export const qualityDefinitionResourceHandler = async (
   uri: URL,
   _extra: Record<string, unknown>,
 ): Promise<ReadResourceResult> => {
-  const qualityDefinitions = await runSonarrResource((gateway) =>
-    gateway.getQualityDefinitions(),
-  );
+  const gateway = createSonarrGateway();
+  const qualityDefinitions = await gateway.getQualityDefinitions();
 
   return {
     contents: qualityDefinitions.map((qualityDefinition) => ({

@@ -1,6 +1,9 @@
 import nock from 'nock';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
-import { listUpcomingEpisodesHandler, listUpcomingEpisodesSchema } from '../list-upcoming-episodes.js';
+import {
+  listUpcomingEpisodesHandler,
+  listUpcomingEpisodesSchema,
+} from '../list-upcoming-episodes.js';
 
 describe('list-upcoming-episodes schema', () => {
   it('validates required fields', () => {

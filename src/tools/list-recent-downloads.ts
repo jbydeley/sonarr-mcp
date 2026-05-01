@@ -1,6 +1,6 @@
 import type { CallToolResult } from '@modelcontextprotocol/sdk/types.js';
 import { z } from 'zod';
-import { runSonarrTool } from '@/common/mcp-helpers.js';
+import { createSonarrGateway, runSonarrTool } from '@/common/mcp-helpers.js';
 
 export const eventTypes = [
   'Unknown',
@@ -15,7 +15,13 @@ export const eventTypes = [
 
 export const listRecentDownloadsSchema = z.object({
   page: z.number().int().positive().default(1).describe('The page number'),
-  pageSize: z.number().int().positive().max(250).default(10).describe('The page size'),
+  pageSize: z
+    .number()
+    .int()
+    .positive()
+    .max(250)
+    .default(10)
+    .describe('The page size'),
   sortKey: z.string().default('date').describe('The sort key'),
   sortDirection: z
     .enum(['default', 'ascending', 'descending'])
@@ -37,8 +43,14 @@ export const listRecentDownloadsSchema = z.object({
       return val.map((eventType) => eventTypes.indexOf(eventType));
     })
     .describe('The event types'),
-  seriesIds: z.array(z.number().int().positive()).nullish().describe('The series IDs'),
-  quality: z.array(z.number().int().positive()).nullish().describe('The quality IDs'),
+  seriesIds: z
+    .array(z.number().int().positive())
+    .nullish()
+    .describe('The series IDs'),
+  quality: z
+    .array(z.number().int().positive())
+    .nullish()
+    .describe('The quality IDs'),
 });
 
 export type ListRecentDownloadsDto = z.infer<typeof listRecentDownloadsSchema>;
@@ -46,5 +58,6 @@ export type ListRecentDownloadsDto = z.infer<typeof listRecentDownloadsSchema>;
 export const listRecentDownloadsHandler = async (
   data: ListRecentDownloadsDto,
 ): Promise<CallToolResult> => {
-  return runSonarrTool((gateway) => gateway.listRecentDownloads(data));
+  const gateway = createSonarrGateway();
+  return runSonarrTool(gateway.listRecentDownloads(data));
 };
