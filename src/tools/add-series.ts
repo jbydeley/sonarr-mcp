@@ -5,9 +5,11 @@ import { SonarrHttpClient } from '@/common/sonarr.http-client.js';
 
 export const addSeriesSchema = z.object({
   title: z.string().describe('The title of the show to add'),
-  tvdbId: z.number().min(1).describe('The TVDB ID of the show to add'),
+  tvdbId: z.number().int().positive().describe('The TVDB ID of the show to add'),
   qualityProfileId: z
     .number()
+    .int()
+    .positive()
     .default(1)
     .describe('The Sonarr quality profile ID to use'),
   rootFolderPath: z
@@ -24,9 +26,11 @@ export const addSeriesSchema = z.object({
     .describe('Whether to use season folders'),
   languageProfileId: z
     .number()
+    .int()
+    .positive()
     .optional()
     .describe('Optional language profile ID'),
-  tags: z.array(z.number()).optional().describe('Optional tag IDs'),
+  tags: z.array(z.number().int().positive()).optional().describe('Optional tag IDs'),
   addOptions: z
     .object({
       searchForMissingEpisodes: z.boolean().default(true),
