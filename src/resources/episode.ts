@@ -14,7 +14,7 @@ export const episodeResourceHandler = async (
   return {
     contents: [
       {
-        uri: uri.pathname,
+        uri: uri.href,
         mimeType: 'application/json',
         text: JSON.stringify(episode),
       },
