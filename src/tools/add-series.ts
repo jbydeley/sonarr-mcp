@@ -1,7 +1,7 @@
 import type { CallToolResult } from '@modelcontextprotocol/sdk/types.js';
 import { z } from 'zod';
 import type { Series } from '@/common/entities/series.entity.js';
-import { SonarrHttpClient } from '@/common/sonarr.http-client.js';
+import { runSonarrTool } from '@/common/mcp-helpers.js';
 
 export const addSeriesSchema = z.object({
   title: z.string().describe('The title of the show to add'),
@@ -43,28 +43,5 @@ export type AddSeriesDto = z.infer<typeof addSeriesSchema>;
 export const addSeriesHandler = async (
   data: AddSeriesDto,
 ): Promise<CallToolResult> => {
-  const sonarrHttpClient = new SonarrHttpClient();
-
-  try {
-    const series = await sonarrHttpClient.post<Series>('/api/v3/series', data);
-    return {
-      content: [
-        {
-          type: 'text',
-          text: JSON.stringify(series),
-        },
-      ],
-    };
-  } catch (err) {
-    const message = err instanceof Error ? err.message : String(err);
-    return {
-      content: [
-        {
-          type: 'text',
-          text: `Failed to add series: ${message}`,
-        },
-      ],
-      isError: true,
-    };
-  }
+  return runSonarrTool((client) => client.post<Series>('/api/v3/series', data));
 };
