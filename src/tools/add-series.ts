@@ -41,16 +41,26 @@ export const addSeriesHandler = async (
 ): Promise<CallToolResult> => {
   const sonarrHttpClient = new SonarrHttpClient();
 
-  const series = await sonarrHttpClient
-    .post<Series>('/api/v3/series', data)
-    .catch((err) => console.error(err));
-
-  return {
-    content: [
-      {
-        type: 'text',
-        text: JSON.stringify(series),
-      },
-    ],
-  };
+  try {
+    const series = await sonarrHttpClient.post<Series>('/api/v3/series', data);
+    return {
+      content: [
+        {
+          type: 'text',
+          text: JSON.stringify(series),
+        },
+      ],
+    };
+  } catch (err) {
+    const message = err instanceof Error ? err.message : String(err);
+    return {
+      content: [
+        {
+          type: 'text',
+          text: `Failed to add series: ${message}`,
+        },
+      ],
+      isError: true,
+    };
+  }
 };
