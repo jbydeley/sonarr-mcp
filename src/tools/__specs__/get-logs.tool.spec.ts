@@ -43,7 +43,13 @@ describe('get-logs tool', () => {
   it('calls Sonarr log endpoint and returns expected result', async () => {
     nock('http://localhost:8989')
       .get('/api/v3/log')
-      .query({ page: '1', pageSize: '10', sortKey: 'date', sortDirection: 'default', level: 'info' })
+      .query({
+        page: '1',
+        pageSize: '10',
+        sortKey: 'date',
+        sortDirection: 'default',
+        level: 'info',
+      })
       .reply(200, {
         page: 1,
         pageSize: 10,

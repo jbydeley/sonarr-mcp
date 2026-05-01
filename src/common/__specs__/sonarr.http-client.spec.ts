@@ -25,9 +25,7 @@ describe('SonarrHttpClient', () => {
 
   describe('get', () => {
     it('returns parsed JSON on success', async () => {
-      nock(baseUrl)
-        .get('/api/v3/series')
-        .reply(200, { id: 1, title: 'Test' });
+      nock(baseUrl).get('/api/v3/series').reply(200, { id: 1, title: 'Test' });
 
       const client = createClient();
       const result = await client.get('/api/v3/series');
@@ -35,9 +33,7 @@ describe('SonarrHttpClient', () => {
     });
 
     it('throws on 4xx with response body', async () => {
-      nock(baseUrl)
-        .get('/api/v3/series')
-        .reply(400, 'Bad Request');
+      nock(baseUrl).get('/api/v3/series').reply(400, 'Bad Request');
 
       const client = createClient();
       await expect(client.get('/api/v3/series')).rejects.toThrow(
@@ -46,9 +42,7 @@ describe('SonarrHttpClient', () => {
     });
 
     it('throws on 5xx with response body', async () => {
-      nock(baseUrl)
-        .get('/api/v3/series')
-        .reply(500, 'Internal Server Error');
+      nock(baseUrl).get('/api/v3/series').reply(500, 'Internal Server Error');
 
       const client = createClient();
       await expect(client.get('/api/v3/series')).rejects.toThrow(
@@ -57,9 +51,7 @@ describe('SonarrHttpClient', () => {
     });
 
     it('throws on invalid JSON response', async () => {
-      nock(baseUrl)
-        .get('/api/v3/series')
-        .reply(200, 'not json');
+      nock(baseUrl).get('/api/v3/series').reply(200, 'not json');
 
       const client = createClient();
       await expect(client.get('/api/v3/series')).rejects.toThrow(
@@ -80,9 +72,7 @@ describe('SonarrHttpClient', () => {
     });
 
     it('throws on non-2xx status', async () => {
-      nock(baseUrl)
-        .post('/api/v3/series')
-        .reply(409, 'Conflict');
+      nock(baseUrl).post('/api/v3/series').reply(409, 'Conflict');
 
       const client = createClient();
       await expect(client.post('/api/v3/series', {})).rejects.toThrow(

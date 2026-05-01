@@ -1,11 +1,21 @@
 import type { CallToolResult } from '@modelcontextprotocol/sdk/types.js';
 import { z } from 'zod';
-import { runSonarrTool } from '@/common/mcp-helpers.js';
+import { createSonarrGateway, runSonarrTool } from '@/common/mcp-helpers.js';
 
 export const findEpisodesSchema = z.object({
   seriesId: z.number().int().positive().describe('The ID of the series'),
-  seasonNumber: z.number().int().positive().optional().describe('The season number'),
-  episodeFileId: z.number().int().positive().optional().describe('The episode file ID'),
+  seasonNumber: z
+    .number()
+    .int()
+    .positive()
+    .optional()
+    .describe('The season number'),
+  episodeFileId: z
+    .number()
+    .int()
+    .positive()
+    .optional()
+    .describe('The episode file ID'),
   includeSeries: z
     .boolean()
     .optional()
@@ -25,5 +35,6 @@ export type FindEpisodesDto = z.infer<typeof findEpisodesSchema>;
 export const findEpisodesHandler = async (
   data: FindEpisodesDto,
 ): Promise<CallToolResult> => {
-  return runSonarrTool((gateway) => gateway.findEpisodes(data));
+  const gateway = createSonarrGateway();
+  return runSonarrTool(gateway.findEpisodes(data));
 };

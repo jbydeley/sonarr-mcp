@@ -1,12 +1,13 @@
 import type { ReadResourceResult } from '@modelcontextprotocol/sdk/types.js';
-import { runSonarrResource } from '@/common/mcp-helpers.js';
+import { createSonarrGateway } from '@/common/mcp-helpers.js';
 
 export const episodeResourceHandler = async (
   uri: URL,
   { id }: Record<string, string | string[] | undefined>,
   _extra: Record<string, unknown>,
 ): Promise<ReadResourceResult> => {
-  const episode = await runSonarrResource((gateway) => gateway.getEpisode(String(id)));
+  const gateway = createSonarrGateway();
+  const episode = await gateway.getEpisode(String(id));
 
   return {
     contents: [
