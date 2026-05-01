@@ -14,8 +14,9 @@ export const searchSeriesHandler = async (
 ): Promise<CallToolResult> => {
   const sonarrHttpClient = new SonarrHttpClient();
 
+  const params = new URLSearchParams({ term: data.term });
   const series = await sonarrHttpClient.get<Series[]>(
-    `/api/v3/series/lookup?term=${data.term}`,
+    `/api/v3/series/lookup?${params.toString()}`,
   );
 
   return {
