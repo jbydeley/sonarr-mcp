@@ -14,7 +14,7 @@ export class SonarrHttpClient {
       headers: this.headers,
       signal: AbortSignal.timeout(10000),
     });
-    return response.json();
+    return this.handleResponse<T>(response);
   }
 
   async post<T = unknown>(path: string, body: unknown): Promise<T> {
@@ -22,7 +22,20 @@ export class SonarrHttpClient {
       method: 'POST',
       headers: this.headers,
       body: JSON.stringify(body),
+      signal: AbortSignal.timeout(10000),
     });
-    return response.json();
+    return this.handleResponse<T>(response);
+  }
+
+  private async handleResponse<T>(response: Response): Promise<T> {
+    const text = await response.text();
+    if (!response.ok) {
+      throw new Error(`Sonarr HTTP ${response.status}: ${text}`);
+    }
+    try {
+      return JSON.parse(text) as T;
+    } catch {
+      throw new Error(`Invalid JSON response from Sonarr: ${text}`);
+    }
   }
 }
