@@ -38,6 +38,7 @@ for (const tool of tools) {
       title: tool.title,
       description: tool.description,
       inputSchema: tool.schema.shape,
+      annotations: tool.annotations,
     },
     tool.handler,
   );
