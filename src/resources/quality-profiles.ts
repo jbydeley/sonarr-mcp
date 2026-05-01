@@ -14,7 +14,7 @@ export const qualityProfilesResourceHandler = async (
 
   return {
     contents: qualityProfiles.map((qualityProfile) => ({
-      uri: `${uri.pathname}/${qualityProfile.id}`,
+      uri: `${uri.href}/${qualityProfile.id}`,
       mimeType: 'application/json',
       text: JSON.stringify(qualityProfile),
     })),

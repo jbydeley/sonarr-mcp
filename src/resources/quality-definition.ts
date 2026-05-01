@@ -13,7 +13,7 @@ export const qualityDefinitionResourceHandler = async (
 
   return {
     contents: qualityDefinitions.map((qualityDefinition) => ({
-      uri: `${uri.pathname}/${qualityDefinition.id}`,
+      uri: `${uri.href}/${qualityDefinition.id}`,
       mimeType: 'application/json',
       text: JSON.stringify(qualityDefinition),
     })),
