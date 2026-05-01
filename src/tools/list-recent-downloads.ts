@@ -1,8 +1,6 @@
 import type { CallToolResult } from '@modelcontextprotocol/sdk/types.js';
 import { z } from 'zod';
-import type { HistoryRecord } from '@/common/entities/history-record.entity.js';
 import { runSonarrTool } from '@/common/mcp-helpers.js';
-import { toUrlParams } from '@/common/to-url-params.js';
 
 export const eventTypes = [
   'Unknown',
@@ -48,8 +46,5 @@ export type ListRecentDownloadsDto = z.infer<typeof listRecentDownloadsSchema>;
 export const listRecentDownloadsHandler = async (
   data: ListRecentDownloadsDto,
 ): Promise<CallToolResult> => {
-  const params = toUrlParams(data);
-  return runSonarrTool((client) =>
-    client.get<HistoryRecord[]>(`/api/v3/history?${params.toString()}`),
-  );
+  return runSonarrTool((gateway) => gateway.listRecentDownloads(data));
 };

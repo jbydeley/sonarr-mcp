@@ -1,8 +1,6 @@
 import type { CallToolResult } from '@modelcontextprotocol/sdk/types.js';
 import { z } from 'zod';
-import type { Episode } from '@/common/entities/episode.entity.js';
 import { runSonarrTool } from '@/common/mcp-helpers.js';
-import { toUrlParams } from '@/common/to-url-params.js';
 
 export const listUpcomingEpisodesSchema = z
   .object({
@@ -45,12 +43,5 @@ export type ListUpcomingEpisodesDto = z.infer<
 export const listUpcomingEpisodesHandler = async (
   data: ListUpcomingEpisodesDto,
 ): Promise<CallToolResult> => {
-  const params = toUrlParams(data);
-
-  params.set('start', new Date(data.start).toISOString());
-  params.set('end', new Date(data.end).toISOString());
-
-  return runSonarrTool((client) =>
-    client.get<Episode[]>(`/api/v3/calendar?${params.toString()}`),
-  );
+  return runSonarrTool((gateway) => gateway.listUpcomingEpisodes(data));
 };

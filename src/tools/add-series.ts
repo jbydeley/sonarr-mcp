@@ -1,6 +1,5 @@
 import type { CallToolResult } from '@modelcontextprotocol/sdk/types.js';
 import { z } from 'zod';
-import type { Series } from '@/common/entities/series.entity.js';
 import { runSonarrTool } from '@/common/mcp-helpers.js';
 
 export const addSeriesSchema = z.object({
@@ -43,5 +42,5 @@ export type AddSeriesDto = z.infer<typeof addSeriesSchema>;
 export const addSeriesHandler = async (
   data: AddSeriesDto,
 ): Promise<CallToolResult> => {
-  return runSonarrTool((client) => client.post<Series>('/api/v3/series', data));
+  return runSonarrTool((gateway) => gateway.addSeries(data));
 };

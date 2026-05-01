@@ -1,22 +1,24 @@
 import type { CallToolResult } from '@modelcontextprotocol/sdk/types.js';
+import { SonarrGateway } from '@/common/sonarr.gateway.js';
 import { SonarrHttpClient } from '@/common/sonarr.http-client.js';
 import { env } from './env.js';
 
-function createClient() {
-  return new SonarrHttpClient({
+function createGateway() {
+  const client = new SonarrHttpClient({
     baseUrl: env.SONARR_URL,
     apiKey: env.SONARR_API_KEY,
     debug: env.SONARR_MCP_DEBUG,
   });
+  return new SonarrGateway(client);
 }
 
 export async function runSonarrTool<T>(
-  fn: (client: SonarrHttpClient) => Promise<T>,
+  fn: (gateway: SonarrGateway) => Promise<T>,
   formatter?: (result: T) => CallToolResult,
 ): Promise<CallToolResult> {
-  const client = createClient();
+  const gateway = createGateway();
   try {
-    const result = await fn(client);
+    const result = await fn(gateway);
     if (formatter) {
       return formatter(result);
     }
@@ -33,8 +35,8 @@ export async function runSonarrTool<T>(
 }
 
 export async function runSonarrResource<T>(
-  fn: (client: SonarrHttpClient) => Promise<T>,
+  fn: (gateway: SonarrGateway) => Promise<T>,
 ): Promise<T> {
-  const client = createClient();
-  return fn(client);
+  const gateway = createGateway();
+  return fn(gateway);
 }
