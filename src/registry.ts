@@ -29,6 +29,7 @@ export const tools = [
     description: 'Add series to Sonarr',
     schema: addSeriesSchema,
     handler: addSeriesHandler,
+    annotations: { readOnlyHint: false },
   },
   {
     name: 'find-episodes',
@@ -36,6 +37,7 @@ export const tools = [
     description: 'Find episodes in Sonarr',
     schema: findEpisodesSchema,
     handler: findEpisodesHandler,
+    annotations: { readOnlyHint: true },
   },
   {
     name: 'get-logs',
@@ -43,6 +45,7 @@ export const tools = [
     description: 'Get logs from Sonarr',
     schema: getLogsSchema,
     handler: getLogsHandler,
+    annotations: { readOnlyHint: true },
   },
   {
     name: 'list-recent-downloads',
@@ -50,6 +53,7 @@ export const tools = [
     description: 'List recent downloads from Sonarr',
     schema: listRecentDownloadsSchema,
     handler: listRecentDownloadsHandler,
+    annotations: { readOnlyHint: true },
   },
   {
     name: 'list-upcoming-episodes',
@@ -57,6 +61,7 @@ export const tools = [
     description: 'List upcoming episodes from Sonarr',
     schema: listUpcomingEpisodesSchema,
     handler: listUpcomingEpisodesHandler,
+    annotations: { readOnlyHint: true },
   },
   {
     name: 'search-series',
@@ -64,6 +69,7 @@ export const tools = [
     description: 'Search for a TV series by term',
     schema: searchSeriesSchema,
     handler: searchSeriesHandler,
+    annotations: { readOnlyHint: true },
   },
 ];
 
