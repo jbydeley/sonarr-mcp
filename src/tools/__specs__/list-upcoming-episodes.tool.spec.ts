@@ -1,52 +1,65 @@
-import { describe, expect, it, vi } from 'vitest';
-import {
-  listUpcomingEpisodesHandler,
-  listUpcomingEpisodesSchema,
-} from '../list-upcoming-episodes.js';
-
-vi.mock('@/common/sonarr.http-client.js', () => {
-  return {
-    SonarrHttpClient: class {
-      get = vi.fn().mockResolvedValue([
-        {
-          id: 1,
-          seriesId: 10,
-          seasonNumber: 2,
-          episodeNumber: 3,
-          title: 'Upcoming Episode',
-          airDate: '2024-02-01',
-          overview: 'Overview text',
-        },
-      ]);
-    },
-  };
-});
+import nock from 'nock';
+import { afterEach, beforeEach, describe, expect, it } from 'vitest';
+import { listUpcomingEpisodesHandler, listUpcomingEpisodesSchema } from '../list-upcoming-episodes.js';
 
 describe('list-upcoming-episodes schema', () => {
-  it('validates required fields (none required)', () => {
+  it('validates required fields', () => {
     const valid = listUpcomingEpisodesSchema.safeParse({});
     expect(valid.success).toBe(true);
   });
 
-  it('applies default values', () => {
-    const parsed = listUpcomingEpisodesSchema.parse({});
-    expect(parsed.unmonitored).toBe(false);
-    expect(parsed.includeSeries).toBe(false);
-    expect(parsed.includeEpisodeFile).toBe(false);
-    expect(parsed.includeEpisodeImages).toBe(false);
+  it('rejects invalid ISO dates', () => {
+    const invalid = listUpcomingEpisodesSchema.safeParse({
+      start: 'not-a-date',
+      end: '2025-01-01T00:00:00Z',
+    });
+    expect(invalid.success).toBe(false);
+  });
+
+  it('rejects when start is after end', () => {
+    const invalid = listUpcomingEpisodesSchema.safeParse({
+      start: '2025-12-31T00:00:00Z',
+      end: '2025-01-01T00:00:00Z',
+    });
+    expect(invalid.success).toBe(false);
+  });
+
+  it('accepts valid date range', () => {
+    const valid = listUpcomingEpisodesSchema.safeParse({
+      start: '2025-01-01T00:00:00Z',
+      end: '2025-01-07T00:00:00Z',
+    });
+    expect(valid.success).toBe(true);
   });
 });
 
 describe('list-upcoming-episodes tool', () => {
-  it('calls SonarrHttpClient.get and returns expected result', async () => {
-    const data = listUpcomingEpisodesSchema.parse({
-      start: new Date().toISOString(),
-      end: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(),
-      includeSeries: false,
-      includeEpisodeFile: false,
-      includeEpisodeImages: false,
-      unmonitored: false,
-    });
+  beforeEach(() => {
+    nock.cleanAll();
+  });
+
+  afterEach(() => {
+    if (!nock.isDone()) {
+      throw new Error('Not all nock interceptors were used!');
+    }
+  });
+
+  it('calls Sonarr calendar endpoint and returns expected result', async () => {
+    nock('http://localhost:8989')
+      .get('/api/v3/calendar')
+      .query(() => true)
+      .reply(200, [
+        {
+          id: 1,
+          seriesId: 100,
+          seasonNumber: 1,
+          episodeNumber: 1,
+          title: 'Upcoming Episode',
+          airDate: '2025-01-01',
+        },
+      ]);
+
+    const data = listUpcomingEpisodesSchema.parse({});
     const result = await listUpcomingEpisodesHandler(data);
     expect((result.content?.[0] as { text: string })?.text).toContain(
       'Upcoming Episode',

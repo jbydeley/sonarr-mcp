@@ -3,9 +3,15 @@
   "module": "index.ts",
   "type": "module",
   "version": "1.6.1",
+  "main": "dist/src/main.js",
   "bin": {
     "sonarr-mcp": "dist/src/main.js"
   },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jbydeley/sonarr-mcp.git"
@@ -41,9 +47,7 @@
     "vite-tsconfig-paths": "6.1.1",
     "vitest": "4.1.4"
   },
-  "peerDependencies": {
-    "typescript": "^5"
-  },
+  "peerDependencies": {},
   "dependencies": {
     "@modelcontextprotocol/sdk": "1.29.0",
     "dotenv": "17.4.1",

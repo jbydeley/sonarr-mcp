@@ -1,5 +1,5 @@
 import type { CallToolResult } from '@modelcontextprotocol/sdk/types.js';
-import { SonarrHttpClient } from './sonarr.http-client.js';
+import { SonarrHttpClient } from '@/common/sonarr.http-client.js';
 
 export async function runSonarrTool<T>(
   fn: (client: SonarrHttpClient) => Promise<T>,

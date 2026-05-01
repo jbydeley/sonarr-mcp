@@ -1,23 +1,6 @@
-import { describe, expect, it, vi } from 'vitest';
+import nock from 'nock';
+import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { addSeriesHandler, addSeriesSchema } from '../add-series.js';
-
-vi.mock('@/common/sonarr.http-client.js', () => {
-  return {
-    SonarrHttpClient: class {
-      post = vi.fn().mockResolvedValue({
-        id: 123,
-        title: 'Test Series',
-        tvdbId: 999,
-        qualityProfileId: 1,
-        rootFolderPath: '/tv',
-        monitored: true,
-        seasonFolder: true,
-        languageProfileId: 2,
-        tags: [1, 2],
-      });
-    },
-  };
-});
 
 describe('add-series schema', () => {
   it('validates required fields', () => {
@@ -47,7 +30,31 @@ describe('add-series schema', () => {
 });
 
 describe('add-series tool', () => {
-  it('calls SonarrHttpClient.post with correct data and returns expected result', async () => {
+  beforeEach(() => {
+    nock.cleanAll();
+  });
+
+  afterEach(() => {
+    if (!nock.isDone()) {
+      throw new Error('Not all nock interceptors were used!');
+    }
+  });
+
+  it('calls Sonarr POST and returns expected result', async () => {
+    nock('http://localhost:8989')
+      .post('/api/v3/series')
+      .reply(200, {
+        id: 123,
+        title: 'Test Series',
+        tvdbId: 999,
+        qualityProfileId: 1,
+        rootFolderPath: '/tv',
+        monitored: true,
+        seasonFolder: true,
+        languageProfileId: 2,
+        tags: [1, 2],
+      });
+
     const data = {
       title: 'Test Series',
       tvdbId: 999,
