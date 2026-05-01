@@ -1,9 +1,19 @@
-import { env } from './env.js';
+export interface SonarrClientConfig {
+  baseUrl: string;
+  apiKey: string;
+  debug?: boolean;
+}
 
 export class SonarrHttpClient {
-  private readonly baseUrl = env.SONARR_URL;
-  private readonly apiKey = env.SONARR_API_KEY;
-  private readonly debug = env.SONARR_MCP_DEBUG;
+  private readonly baseUrl: string;
+  private readonly apiKey: string;
+  private readonly debug: boolean;
+
+  constructor(config: SonarrClientConfig) {
+    this.baseUrl = config.baseUrl;
+    this.apiKey = config.apiKey;
+    this.debug = config.debug ?? false;
+  }
 
   private get headers() {
     return { 'X-Api-Key': this.apiKey, 'Content-Type': 'application/json' };

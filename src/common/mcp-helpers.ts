@@ -1,11 +1,20 @@
 import type { CallToolResult } from '@modelcontextprotocol/sdk/types.js';
 import { SonarrHttpClient } from '@/common/sonarr.http-client.js';
+import { env } from './env.js';
+
+function createClient() {
+  return new SonarrHttpClient({
+    baseUrl: env.SONARR_URL,
+    apiKey: env.SONARR_API_KEY,
+    debug: env.SONARR_MCP_DEBUG,
+  });
+}
 
 export async function runSonarrTool<T>(
   fn: (client: SonarrHttpClient) => Promise<T>,
   formatter?: (result: T) => CallToolResult,
 ): Promise<CallToolResult> {
-  const client = new SonarrHttpClient();
+  const client = createClient();
   try {
     const result = await fn(client);
     if (formatter) {
@@ -26,6 +35,6 @@ export async function runSonarrTool<T>(
 export async function runSonarrResource<T>(
   fn: (client: SonarrHttpClient) => Promise<T>,
 ): Promise<T> {
-  const client = new SonarrHttpClient();
+  const client = createClient();
   return fn(client);
 }
