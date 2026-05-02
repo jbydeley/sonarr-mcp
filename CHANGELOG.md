@@ -1,3 +1,21 @@
+# [1.7.0](https://github.com/jbydeley/sonarr-mcp/compare/v1.6.1...v1.7.0) (2026-05-02)
+
+
+### Bug Fixes
+
+* add HTTP error handling and timeout to SonarrHttpClient ([576bbf8](https://github.com/jbydeley/sonarr-mcp/commit/576bbf8006b325d1ed8a895839e43483ab4741a2))
+* harden Zod input validation across tools ([33d0296](https://github.com/jbydeley/sonarr-mcp/commit/33d0296d00ee1c14c98464f40a4eca5985ca45a2))
+* properly URL-encode search term in search-series ([f188282](https://github.com/jbydeley/sonarr-mcp/commit/f18828246fce5ca6f5095eef96f3d5ea98e3c99c))
+* return full MCP URIs from resource handlers ([fca3793](https://github.com/jbydeley/sonarr-mcp/commit/fca37934d215092f13cb87e9f9e521d0ac1a43c1))
+* return proper MCP error result from add-series ([bde302a](https://github.com/jbydeley/sonarr-mcp/commit/bde302a234314061b11b69e1b13df4bfd09d95d4))
+
+
+### Features
+
+* add MCP tool annotations for read-only and mutating tools ([5d6feb3](https://github.com/jbydeley/sonarr-mcp/commit/5d6feb3936cd4550cb8896fdb079063bceb9145d))
+* add optional debug logging for Sonarr requests ([6428d89](https://github.com/jbydeley/sonarr-mcp/commit/6428d89032f69c7cbb2e1472d0278bd2d1bbcef2))
+* **dependencies:** Update dependencies and fix list-upcoming-episodes tool ([cdb683c](https://github.com/jbydeley/sonarr-mcp/commit/cdb683c956773da5751a94f75cf4cae85567fe94))
+
 ## [1.6.1](https://github.com/jbydeley/sonarr-mcp/compare/v1.6.0...v1.6.1) (2025-08-13)
 
 

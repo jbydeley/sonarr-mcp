@@ -2,7 +2,7 @@
   "name": "sonarr-mcp",
   "module": "index.ts",
   "type": "module",
-  "version": "1.6.1",
+  "version": "1.7.0",
   "main": "dist/src/main.js",
   "bin": {
     "sonarr-mcp": "dist/src/main.js"
